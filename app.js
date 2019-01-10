@@ -10,6 +10,8 @@ const express = require("express"),
 const userRoute = require("./routes/userRoute");
 const adminRoute = require("./routes/adminRoute");
 const registerRoute = require("./routes/reigsterRoute");
+const loginRoute = require("./routes/loginRoute");
+
 
 //Set port for local server
 const PORT = 8080;
@@ -40,12 +42,14 @@ mongoose
 //Passport Middleware
 app.use(passport.initialize());
 
-//Passport Config
-//require("./config/passport.js")(passport);
+//Passport Config for webtoken 
+require("./config/passport.js")(passport);
 
 app.use("/user", userRoute);
 app.use("/admin", adminRoute);
 app.use("/register", registerRoute);
+app.use("/login", loginRoute);
+
 
 app.listen(PORT || process.env.PORT, err => {
   console.log("App is running at ", PORT);
