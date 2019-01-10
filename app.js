@@ -9,6 +9,7 @@ const express = require("express"),
 //Import Routes
 const userRoute = require("./routes/userRoute");
 const adminRoute = require("./routes/adminRoute");
+const registerRoute = require("./routes/reigsterRoute");
 
 //Set port for local server
 const PORT = 8080;
@@ -44,6 +45,8 @@ app.use(passport.initialize());
 
 app.use("/user", userRoute);
 app.use("/admin", adminRoute);
+app.use("/register", registerRoute);
+
 app.listen(PORT || process.env.PORT, err => {
   console.log("App is running at ", PORT);
 });
