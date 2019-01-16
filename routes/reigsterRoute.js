@@ -5,6 +5,7 @@ const express = require("express"),
   jwt = require("jsonwebtoken"),
   keys = require("../config/keys"),
   passport = require("passport");
+const validateRegisterInput = require("../validation/register");
 
 //Get /register form
 router.get("/", (req, res) => {
@@ -15,7 +16,13 @@ router.get("/", (req, res) => {
 //Register the user
 
 router.post("/", (req, res) => {
-  let errors = {};
+  const { errors, isValid } = validateRegisterInput(req.body);
+
+  //Check validation
+  if (!isValid) {
+    return res.status(400).json(errors);
+  }
+
   User.findOne({ email: req.body.email }).then(user => {
     if (user) {
       errors.email = "Email already exists";
@@ -32,6 +39,7 @@ router.post("/", (req, res) => {
       bcrypt.genSalt(10, (err, salt) => {
         bcrypt.hash(newUser.password, salt, (err, hash) => {
           if (err) throw err;
+          //Set the password to the hashed one
           newUser.password = hash;
           newUser
             .save()
@@ -42,9 +50,5 @@ router.post("/", (req, res) => {
     }
   });
 });
-
-
-
-
 
 module.exports = router;
