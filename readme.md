@@ -44,7 +44,7 @@ Views is basically the folder consisiting of all the front-end part of this appl
  <% your code %>: If youre not outputing values but just trying to use logic like. for eg:<br>
  ` <% numbers.ForEcah(number)%> ` 
 
- <%= you code %>: If you are outputting values. for eg: <br>
+ <%= you code %>: If you are outputting values. for eg: 
  `<p><%= page.title <p>`
 
  Most of the time these two are the only tags used in ejs.
