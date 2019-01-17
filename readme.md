@@ -33,3 +33,20 @@ This folder contains backend validation codes for input values coming from front
  2. Passport.js for passport and jwt web token configuration 
 
 
+### Views and About Ejs Tempaltes ###
+
+Views is basically the folder consisiting of all the front-end part of this application like in most of the node application.<br>
+ 1. **Partials**: This folder is supposed to have reusable parts of Html page. The two files header.ejs and footer.ejs have the upper and lower half of the html body.
+ 2. **Logine.ejs And Register.ejs**: These file handle login and register respectively.
+
+<br>
+ Inisde a ejs template all the javascript logic should be enclosed using ejs tags and it may vary depending on the use. <br>
+ <% your code %>: If youre not outputing values but just trying to use logic like. for eg:<br>
+ `<% numbers.ForEcah(number)... so om%>`
+
+ <%= you code %>: If you are outputting values. for eg: <br>
+ `<p><%= page.title <p>`
+
+ Most of the time these two are the only tags used in ejs.
+
+ <br>
