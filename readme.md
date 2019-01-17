@@ -42,7 +42,7 @@ Views is basically the folder consisiting of all the front-end part of this appl
 <br>
  Inisde a ejs template all the javascript logic should be enclosed using ejs tags and it may vary depending on the use. <br>
  <% your code %>: If youre not outputing values but just trying to use logic like. for eg:<br>
- ` <% numbers.ForEcah(number)%> ` 
+ `<% numbers.ForEcah(number)%>` 
 
  <%= you code %>: If you are outputting values. for eg: 
  `<p><%= page.title <p>`
@@ -50,3 +50,4 @@ Views is basically the folder consisiting of all the front-end part of this appl
  Most of the time these two are the only tags used in ejs.
 
  <br>
+ But all other html tags can be used normally.
