@@ -33,7 +33,8 @@ router.post("/", (req, res) => {
         username: req.body.username,
         password: req.body.password,
         email: req.body.email,
-        phone: req.body.phone
+        phone: req.body.phone,
+        memberCategory:req.body.memberCategory
       });
       //Hash password using bcrypt js to store them securely
       bcrypt.genSalt(10, (err, salt) => {
@@ -52,3 +53,4 @@ router.post("/", (req, res) => {
 });
 
 module.exports = router;
+

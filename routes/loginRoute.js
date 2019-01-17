@@ -15,7 +15,7 @@ router.get("/", (req, res) => {
 //login the user
 
 router.post("/", (req, res) => {
-  const { errors, isValid } = validateRegisterInput(req.body);
+  const { errors, isValid } = validateLoginInput(req.body);
 
   //Check validation
   if (!isValid) {
@@ -42,7 +42,8 @@ router.post("/", (req, res) => {
           const payload = {
             id: user.id,
             name: user.name,
-            phone: user.phone
+            phone: user.phone,
+            lastLoggedIn: user.lastLoggedIn
           };
 
           jwt.sign(
@@ -57,6 +58,9 @@ router.post("/", (req, res) => {
               });
             }
           );
+          //Edit last loggedin time
+          user.lastLoggedIn = Date.now();
+          user.save();
         } else {
           errors.password = "Password do not match";
           return res.status(400).json(errors);
@@ -64,6 +68,12 @@ router.post("/", (req, res) => {
       });
     })
     .catch(err => console.log(err));
+});
+//Logout
+router.all("/logout", function(req, res) {
+  req.logout();
+  //res.redirect("/login");
+  res.send('Logged out')
 });
 
 module.exports = router;

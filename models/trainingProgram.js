@@ -1,7 +1,8 @@
 const mongoose = require("mongoose");
+Schema = mongoose.Schema;
 
 //Create UserSchema
-const TrainingProgramSchema = mongoose.Schema({
+const TrainingProgramSchema = new Schema({
   //title of Workout
   title: {
     type: String,
@@ -10,7 +11,8 @@ const TrainingProgramSchema = mongoose.Schema({
   //name of instructor or self
   instructor: {
     type: String,
-    required: true
+    required: true,
+    default: "self"
   },
   // Goal of training program
   target: {
@@ -23,9 +25,10 @@ const TrainingProgramSchema = mongoose.Schema({
     required: true
   },
   //Location of gym if multiple locations
-  locatoin: {
+  location: {
     type: String,
-    required: true
+    required: true,
+    default: "Oulu"
   },
   //Time of day
   time: {
@@ -46,7 +49,8 @@ const TrainingProgramSchema = mongoose.Schema({
   day: [
     {
       type: String,
-      required: true
+      required: true,
+      default: "everyday"
     }
   ],
   //Description of program
@@ -56,21 +60,24 @@ const TrainingProgramSchema = mongoose.Schema({
   },
   //Number of place at one session
   total_seat: {
-    type: String,
+    type: Number,
     required: true
   },
   //Total number of students Enrolled
   seats_taken: {
-    type: String,
-    required: true
+    type: Number,
+    required: true,
+    default:0
   },
   //List of students enrolled
-  enrolled_students: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "users"
-    }
-  ]
+  created_by: {
+   type:String,
+   required:true
+  },
+  // gym:{
+  //   type:Schema.Types.ObjectId,
+  //   ref:'gym'
+  // }
 });
 
 const TrainingProgram = mongoose.model(

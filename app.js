@@ -11,7 +11,7 @@ const userRoute = require("./routes/userRoute");
 const adminRoute = require("./routes/adminRoute");
 const registerRoute = require("./routes/reigsterRoute");
 const loginRoute = require("./routes/loginRoute");
-
+const profileRotue = require("./routes/profileRoute");
 
 //Set port for local server
 const PORT = 8080;
@@ -34,7 +34,7 @@ const db = require("./config/keys").mongoURI;
 mongoose
   .connect(
     db,
-    { useNewUrlParser: true }
+    { useNewUrlParser: true, useCreateIndex: true }
   )
   .then(success => console.log("Connected to Db"))
   .catch(err => console.log(err));
@@ -42,15 +42,14 @@ mongoose
 //Passport Middleware
 app.use(passport.initialize());
 
-//Passport Config for webtoken 
+//Passport Config for webtoken
 require("./config/passport.js")(passport);
 
 app.use("/user", userRoute);
 app.use("/admin", adminRoute);
 app.use("/register", registerRoute);
 app.use("/login", loginRoute);
-
-
+app.use("/profile", loginRoute);
 app.listen(PORT || process.env.PORT, err => {
   console.log("App is running at ", PORT);
 });

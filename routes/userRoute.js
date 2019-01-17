@@ -4,7 +4,6 @@ const express = require("express"),
   jwt = require("passport-jwt"),
   router = express.Router();
 //Set port for local server
-const PORT = 8080;
 
 router.get("/profile", (req, res) => {
   res.send("This is user profile page");

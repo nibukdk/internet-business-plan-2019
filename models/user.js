@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
-
-//Create UserSchema 
+Schema = mongoose.Schema;
+//Create UserSchema
 const UserSchema = mongoose.Schema({
   name: {
     type: String,
@@ -17,11 +17,28 @@ const UserSchema = mongoose.Schema({
   email: {
     type: String,
     required: true,
-    unique:true
+    unique: true
   },
   phone: {
     type: String,
     required: true
+  },
+  memberCategory: {
+    type: String,
+    required: true
+  },
+  registeredDate: {
+    type: Date,
+    default: Date.now
+  },
+  lastLoggedIn: {
+    type: Date,
+    default: Date.now
+  },
+
+  profile: {
+    ref: "profile",
+    type: Schema.Types.ObjectId
   }
 });
 
