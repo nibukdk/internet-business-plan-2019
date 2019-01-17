@@ -11,7 +11,9 @@
 This module lets you authenticate endpoints using a JSON web token. It is intended to be used to secure RESTful endpoints without sessions.
 
 <br>
+
 ## Folders and Purpose ##
+
 ### Validation Folder ###
 This folder contains backend validation codes for input values coming from front-end.
 
