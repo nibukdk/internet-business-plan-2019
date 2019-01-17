@@ -9,7 +9,9 @@ const validateRegisterInput = require("../validation/register");
 
 //Get /register form
 router.get("/", (req, res) => {
-  res.status(200).json({ msg: "THis is register page" });
+  //res.status(200).json({ msg: "THis is register page" });
+  const page={ title:'Register'}
+  res.status(200).render('register',{page:page})
 });
 
 // /register

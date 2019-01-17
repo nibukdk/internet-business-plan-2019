@@ -20,10 +20,11 @@ const PORT = 8080;
 app.set("view engine", "ejs");
 
 app.get("/", (req, res) => {
-  res.render("index.ejs");
+  const page = { title: "Home" };
+  res.render("index.ejs", { page: page });
 });
 
-//Use Body Parser
+app.use(express.static(__dirname + "/public/"));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 

@@ -8,7 +8,10 @@ const express = require("express"),
 const validateLoginInput = require("../validation/login");
 //Get /login form
 router.get("/", (req, res) => {
-  res.status(200).json({ msg: "THis is login page" });
+ // res.status(200).json({ msg: "THis is login page" });
+ const page={ title:'Login'}
+  res.status(200).render('login',{page:page})
+
 });
 
 // /login
