@@ -1,4 +1,4 @@
-# Internet Based Project 
+# Internet Based Project #
 
 **This is internet based project demo application Oamk(2019)**<br>
 
@@ -11,8 +11,8 @@
 This module lets you authenticate endpoints using a JSON web token. It is intended to be used to secure RESTful endpoints without sessions.
 
 <br>
-## Folders and Purpose
-### Validation Folder 
+## Folders and Purpose ##
+### Validation Folder ###
 This folder contains backend validation codes for input values coming from front-end.
 
  1. **isEmpty.js** is file that checks null values for inputs
@@ -22,12 +22,12 @@ This folder contains backend validation codes for input values coming from front
  Validation check includes checking empty string, confirmation for input like passwords.
  <br>
 
- ### models
+ ### models ###
  Models have mongoose schema for different collections like users, training-program,profile.
 
- ### Config
+ ### Config ###
  Config is mainly created for proper code refactoring. Its consists of file:<br>
  1.  keys.js for mongodb configuration 
  2. Passport.js for passport and jwt web token configuration 
- 
+
 
