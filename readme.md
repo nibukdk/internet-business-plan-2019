@@ -12,6 +12,29 @@ This module lets you authenticate endpoints using a JSON web token. It is intend
 
 <br>
 
+## Getting Started
+
+To run this project in your computer first:
+1. You need to install Mongodb in your root folder
+2. For un-interrupted running your project install monogod. It hepls to refresh server without having to manually restart
+
+After that create **data** folder in your project root folder.
+1. Copy folder path 
+2. Open command prompt
+3. Type = **mongod --dbpath < your data folder path >**
+4. Press enter. 
+This step helps connect mongo install in your computer <br>
+
+Now open another command prompt and type command<br>
+
+**mongo** <br>
+
+This shall open mongod shell. <br>
+
+note-Its not necessary for fron-end though
+
+
+
 ## Folders and Purpose ##
 
 ### Validation Folder ###
@@ -37,14 +60,16 @@ This folder contains backend validation codes for input values coming from front
 
 Views is basically the folder consisiting of all the front-end part of this application like in most of the node application.<br>
  1. **Partials**: This folder is supposed to have reusable parts of Html page. The two files header.ejs and footer.ejs have the upper and lower half of the html body.
- 2. **Logine.ejs And Register.ejs**: These file handle login and register respectively.
+ 2. **Login.ejs And Register.ejs**: These file handle login and register respectively.
 
 <br>
  Inisde a ejs template all the javascript logic should be enclosed using ejs tags and it may vary depending on the use. <br>
- <% your code %>: If youre not outputing values but just trying to use logic like. for eg:<br>
+ <% your code %>: If youre not outputing values but just trying to use logic like. for eg:
+ 
  `<% numbers.ForEcah(number)%>` 
 
  <%= you code %>: If you are outputting values. for eg: 
+
  `<p><%= page.title <p>`
 
  Most of the time these two are the only tags used in ejs.
