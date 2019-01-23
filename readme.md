@@ -15,8 +15,8 @@ This module lets you authenticate endpoints using a JSON web token. It is intend
 ## Getting Started
 
 To run this project in your computer first:
-1. You need to install Mongodb in your root folder
-2. For un-interrupted running your project install monogod. It hepls to refresh server without having to manually restart
+1. You need to install **Mongodb** in your computer. 
+2. For un-interrupted running your project install **nodemon**. It hepls to refresh server without having to manually restart.
 
 After that create **data** folder in your project root folder.
 1. Copy folder path 
@@ -29,9 +29,9 @@ Now open another command prompt and type command<br>
 
 **mongo** <br>
 
-This shall open mongod shell. <br>
+This shall open mongod shell.note-Its not necessary for fron-end though <br>
 
-note-Its not necessary for fron-end though
+
 
 
 
