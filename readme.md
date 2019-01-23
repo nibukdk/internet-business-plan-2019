@@ -74,14 +74,14 @@ footers = `</body></html>`
  at footers.js you can include JS links that are needed to included in the end of file.<br>
 
  For any other views like index.ejs, if you want to include header and footer for eg:
-  `<%include <path to file you want to include> %>` 
+  `<%include **path to file you want to include** %>` 
 
   and put all the main body inbetween header and footer <br>
 
   
 
   `<% include  partials/headers/header.ejs %>`
- <!--Here only include main body part. From <body> tag in html file-->
+ **Here only include main body part. From <body> tag in html file**
 `<% include  partials/footers/footer.ejs %>`
 
  2. **Login.ejs And Register.ejs**: These file handle login and register respectively.
