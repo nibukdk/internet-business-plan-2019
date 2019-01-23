@@ -59,7 +59,31 @@ This folder contains backend validation codes for input values coming from front
 ### Views and About Ejs Tempaltes ###
 
 Views is basically the folder consisiting of all the front-end part of this application like in most of the node application.<br>
- 1. **Partials**: This folder is supposed to have reusable parts of Html page. The two files header.ejs and footer.ejs have the upper and lower half of the html body.
+ 1. **Partials**: This folder is supposed to have reusable parts of Html page. The two files header.ejs and footer.ejs have the upper and lower half of the html body.<br>
+
+ Pratials Folder has two files headers.ejs and footers.ejs. These files can be used as partial html body where headers has html body from < html > tag to < body > tag and footers has part is consist of ending
+ 
+ headers = `<html>..... <body>`
+footers = `</body></html>`
+ 
+ <br>
+ TO include css links and bootstrap links:<br>
+
+ go to headers.ejs, there you will find header part where you can list links.
+
+ at footers.js you can include JS links that are needed to included in the end of file.<br>
+
+ For any other views like index.ejs, if you want to include header and footer for eg:
+  `<%include <path to file you want to include> %>` 
+
+  and put all the main body inbetween header and footer <br>
+
+  
+
+  `<% include  partials/headers/header.ejs %>`
+ <!--Here only include main body part. From <body> tag in html file-->
+`<% include  partials/footers/footer.ejs %>`
+
  2. **Login.ejs And Register.ejs**: These file handle login and register respectively.
 
 <br>
@@ -76,3 +100,5 @@ Views is basically the folder consisiting of all the front-end part of this appl
 
  <br>
  But all other html tags can be used normally.
+
+
