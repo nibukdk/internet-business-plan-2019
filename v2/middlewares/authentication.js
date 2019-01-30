@@ -24,11 +24,13 @@ module.exports.isLoggedInMiddleWare = isLoggedInMiddleWare = (
 };
 
 module.exports.adminLoggedIn = adminLoggedIn = (req, res, next) => {
-    
   if (req.isAuthenticated() && req.user.memberCategory !== "student") {
     return next();
   }
   // req.flash("error", "You are not allowed for this route");
   // res.redirect("/");
-  res.status(403).json({ msg: "You are unatuhrized" });
+  const page = { title: "Login" };
+  res
+    .status(403)
+    .redirect("/login");
 };

@@ -12,21 +12,16 @@ router.use((req, res, next) => {
   res.locals.user = req.user;
   next();
 });
-router.get("/", (req, res) => {
+router.get("/", authencation.adminLoggedIn, (req, res) => {
   const page = { title: "Admin" };
+  console.log(req.user);
   res.status(200).render("admin", { page: page });
 });
 
 router.get("/set-program", authencation.adminLoggedIn, (req, res) => {
-  // if (req.user.memberCategory === "student") {
-  //   res.status(200).json({ msg: "You are not allowed to set program" });
-  // } else {
-  //   // res.send("Create from for this page");
-  //   const page = { title: "set-program" };
-
-  //   res.render("createProgram", { page });
-  // }
-  res.json({ msg: "ok" });
+  // res.json({ msg: "ok" });
+  const page = { title: "Create Program" };
+  res.render("createProgram", { page: page });
 });
 
 // router.post(
