@@ -29,6 +29,7 @@ module.exports.adminLoggedIn = adminLoggedIn = (req, res, next) => {
   }
   // req.flash("error", "You are not allowed for this route");
   // res.redirect("/");
+  //Later change this to customer link 
   const page = { title: "Login" };
   res
     .status(403)
