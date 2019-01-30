@@ -1,9 +1,10 @@
 const express = require("express"),
+  session = require("express-session"),
   bodyParser = require("body-parser"),
   passport = require("passport"),
   mongoose = require("mongoose"),
   methodOverride = require("method-override"),
-  LocalStrategy = require("passport-local").Strategy,
+  LocalStrategy = require("passport-local"),
   User = require("./models/user"),
   app = express();
 
@@ -29,33 +30,20 @@ app.use(methodOverride("_method"));
 
 //use passport and set session
 app.use(
-  require("express-session")({
+  session({
     secret: "Login is necessary",
     resave: false,
-    saveUninitialized: false
+    saveUninitialized: false,
+    //Expires in one hour value given in milliseconds
+    cookie: { _expires: 3600000 }
   })
 );
 
 app.use(passport.initialize());
+//THis should always be declated after express session
 app.use(passport.session());
 
 passport.use(new LocalStrategy(User.authenticate()));
-// passport.use(
-//   new LocalStrategy((username, password, done) => {
-//     User.findOne({ username: username }, (err, user) => {
-//       if (err) {
-//         return done(err);
-//       }
-//       if (!user) {
-//         return done(null, false, { message: "Incorrect username." });
-//       }
-//       if (user.password !== password) {
-//         return done(null, false, { message: "Incorrect password." });
-//       }
-//       return done(null, user);
-//     });
-//   })
-// );
 
 //Prevent back button after logout
 app.use((req, res, next) => {
