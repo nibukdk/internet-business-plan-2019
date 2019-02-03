@@ -2,11 +2,13 @@ const express = require("express"),
   bodyParser = require("body-parser"),
   passport = require("passport"),
   jwt = require("passport-jwt"),
-  router = express.Router();
+  router = express.Router(),
+  date = require("date-and-time");
 
 const authencation = require("../middlewares/authentication");
-const TrainingProgramModel = require("../models/trainingProgram");
+const validateTrainProgramInput = require("../validation/trainingProgram");
 
+const TrainingProgramModel = require("../models/trainingProgram");
 //This proivdes info about local user or current user
 router.use((req, res, next) => {
   res.locals.user = req.user;
@@ -14,69 +16,64 @@ router.use((req, res, next) => {
 });
 router.get("/", authencation.adminLoggedIn, (req, res) => {
   const page = { title: "Admin" };
-  console.log(req.user);
   res.status(200).render("admin", { page: page });
 });
 
 router.get("/set-program", authencation.adminLoggedIn, (req, res) => {
   // res.json({ msg: "ok" });
-  const page = { title: "Create Program" };
+  const page = { title: "New Routine" };
+
   res.render("createProgram", { page: page });
 });
 
-// router.post(
-//   "/set-program",
-//   passport.authenticate("JWT", { session: false }),
-//   (req, res) => {
-//     const TrainingProgram = {};
-//     const errors = {};
-//     if (req.user.memberCategory === "student") {
-//       res.status(200).json({ msg: "You are not allowed to set program" });
-//     } else {
-//       // res.status(200).json({msg:'This is admin set program page'})
-//       (TrainingProgram.title = req.body.title),
-//         (TrainingProgram.instructor = req.body.instructor),
-//         (TrainingProgram.target = req.body.target),
-//         (TrainingProgram.program_type = req.body.program_type),
-//         (TrainingProgram.location = req.body.location),
-//         (TrainingProgram.start_time = req.body.start_time),
-//         (TrainingProgram.end_time = req.body.end_time),
-//         (TrainingProgram.day = req.body.day),
-//         (TrainingProgram.start_date = req.body.start_date),
-//         (TrainingProgram.end_date = req.body.end_date),
-//         (TrainingProgram.description = req.body.description),
-//         (TrainingProgram.total_seat = req.body.total_seat),
-//         (TrainingProgram.seats_taken = req.body.seats_taken),
-//         (TrainingProgram.created_by = req.user.id);
-//       new TrainingProgramModel(TrainingProgram)
-//         .save()
-//         .then(program => res.json(program)); //Later add views here
-//     }
-//   }
-// );
-// //Get program edit
-// router.get(
-//   "/edit_program/:id",
-//   passport.authenticate("JWT", { session: false }),
-//   (req, res) => {
-//     const errors = {};
+router.post("/set-program", authencation.adminLoggedIn, (req, res) => {
+  console.log( req.body);
+  const { errors, isValid } = validateTrainProgramInput(req.body);
 
-//     TrainingProgramModel.findById(req.params.id)
-//       .then(program => {
-//         if (!program) {
-//           console.log("Program not found");
-//           res.status(404).json((errors.msg = "Requested program not found"));
-//         } else {
-//           // res.render('edit',{program:program})
-//           res.status(200).json(program);
-//           //console.log(program);
-//         }
-//       })
-//       .catch(err => {
-//         throw err;
-//       });
-//   }
-// );
+  const TrainingProgram = {};
+  if (isValid) {
+    // res.status(200).json({msg:'This is admin set program page'})
+    (TrainingProgram.title = req.body.title),
+      (TrainingProgram.instructor = req.body.instructor),
+      (TrainingProgram.target = req.body.target),
+      (TrainingProgram.program_type = req.body.program_type),
+      (TrainingProgram.gym_location = req.body.gym_location),
+      (TrainingProgram.room_number = req.body.room_number),
+      (TrainingProgram.start_time = req.body.start_time),
+      (TrainingProgram.end_time = req.body.end_time),
+      (TrainingProgram.day = req.body.day),
+      (TrainingProgram.start_date = req.body.start_date),
+      (TrainingProgram.end_date = req.body.end_date),
+      (TrainingProgram.description = req.body.description),
+      (TrainingProgram.total_seat = req.body.total_seat),
+      (TrainingProgram.seats_taken = req.body.seats_taken),
+      (TrainingProgram.created_by = req.user.id);
+    new TrainingProgramModel(TrainingProgram)
+      .save()
+      .then(program => res.json(program)); //Later add views here
+  } else {
+    res.status(400).json(errors);
+  }
+});
+//Get program edit
+router.get("/edit_program/:id", authencation.adminLoggedIn, (req, res) => {
+  const errors = {};
+
+  TrainingProgramModel.findById(req.params.id)
+    .then(program => {
+      if (!program) {
+        console.log("Program not found");
+        res.status(404).json((errors.msg = "Requested program not found"));
+      } else {
+        // res.render('edit',{program:program})
+        res.status(200).json(program);
+        //console.log(program);
+      }
+    })
+    .catch(err => {
+      throw err;
+    });
+});
 
 // //post program edit
 // router.put(

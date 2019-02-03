@@ -33,11 +33,11 @@ const TrainingProgramSchema = new Schema({
   },
   //Time of day
   start_time: {
-    type: Date,
+    type: String,
     required: true
   },
   end_time: {
-    type: Date,
+    type: String,
     required: true
   },
   //Start Date
@@ -78,11 +78,18 @@ const TrainingProgramSchema = new Schema({
   created_by: {
     ref: "user",
     type: Schema.Types.ObjectId
+  },
+  //Gym_location
+  //Stored like [address, room_num]
+  //For eg: keskusta 11, 301,
+  gym_location: {
+    type: String,
+    required: true
+  },
+  room_number: {
+    type: String,
+    required: true
   }
-  // gym:{
-  //   type:Schema.Types.ObjectId,
-  //   ref:'gym'
-  // }
 });
 TrainingProgramSchema.plugin(passportLocalMongoose);
 
