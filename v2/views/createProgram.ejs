@@ -1,5 +1,5 @@
 <% include partials/headers/header.ejs %>
-<form  method="POST">
+<form method="POST">
   <div class="form-group">
     <label for="title">Title</label>
     <input
@@ -10,19 +10,24 @@
       placeholder="program title"
     />
   </div>
+
   <div class="form-group">
     <label for="instructor">Instructor</label>
-    <input
-      type="text"
-      class="form-control"
-      id="instructor"
-      name="instructor"
-      placeholder="Instructor"
-    />
+    <select class="custom-select" id="instructor" name="instructor">
+      <option selected value=""> Select Instructor from the list</option>
+      <option value="Charlie Couto"> Charlie Couto</option>
+      <option value="Shera Verrett"> Shera Verrett</option>
+      <option value="Jude Halberg">Jude Halberg </option>
+      <option value="Orpha Sala">Orpha Sala </option>
+      <option value="Vicki Vinci"> Vicki Vinci</option>
+      <option value="Brady Sheely"> Brady Sheely</option>
+    </select>
+
     <small id="instructor" class="form-text text-muted"
       >Leave empty for self taining</small
     >
   </div>
+
   <div class="form-group">
     <label for="target">Target</label>
     <input
@@ -34,26 +39,16 @@
     />
   </div>
   <div class="form-group">
-    <label for="program-type">Program Type</label>
+    <label for="program_type">Program Type</label>
     <input
       type="text"
       class="form-control"
       id="program_type"
       placeholder="Program Type like yoga, weights, dance etc"
-      name="program-type"
+      name="program_type"
     />
   </div>
 
-  <div class="form-group">
-    <label for="location">Location</label>
-    <input
-      type="text"
-      class="form-control"
-      id="location"
-      placeholder="location"
-      name="location"
-    />
-  </div>
   <div class="form-row">
     <div class="form-group col-lg-6 col-md-6">
       <label for="start_time">Start-Time</label>
@@ -103,52 +98,130 @@
     </div>
   </div>
   <div class="form-group ">
-    <label for="days">Days of week</label>
+    <label for="day">Days of week</label>
     <input
       type="text"
       class="form-control"
-      id="days"
+      id="day"
       placeholder="Days of Week to repeat"
-      name="days"
+      name="day"
     />
   </div>
   <div class="form-group">
-    <label for="total-seats">Total Seats</label>
+    <label for="total_seat">Total Seats</label>
     <input
       type="number"
       class="form-control"
-      id="total-seats"
-      placeholder="Input toal avialable days"
-      name="total-seats"
+      id="total_seat"
+      placeholder="Provide total available seat"
+      name="total_seat"
     />
   </div>
-
-  <!-- <div class="form-group">
-    <label for="exampleFormControlSelect1">Example select</label>
-    <select class="form-control" id="exampleFormControlSelect1">
-      <option>1</option>
-      <option>2</option>
-      <option>3</option>
-      <option>4</option>
-      <option>5</option>
+  <div class="form-group location">
+    <label for="gym_location">Location</label>
+    <select
+      class="custom-select gym_location"
+      id="gym_location"
+      name="gym_location"
+    >
+      <option selected value=""> Select Location from the list</option>
+      <option value="Kotkantie 1 " class="kotkantie_1"> Kotkantie 1</option>
+      <option value="Peltolankaari 6B" class="peltolankaari_6B">
+        Peltolankaari 6B</option
+      >
+      <option value="Hanhitie 17" class="hanhitie_17">Hanhitie 17 </option>
     </select>
-  </div> -->
-  <!-- <div class="form-group">
-    <label for="exampleFormControlSelect2">Example multiple select</label>
-    <select multiple class="form-control" id="exampleFormControlSelect2">
-      <option>1</option>
-      <option>2</option>
-      <option>3</option>
-      <option>4</option>
-      <option>5</option>
-    </select>
-  </div> -->
+  </div>
   <div class="form-group">
     <label for="description">Description</label>
     <textarea class="form-control" id="description" rows="3" name="description">
     </textarea>
   </div>
-
   <button class="btn-lg btn-info">Submit</button>
 </form>
+
+
+<script type="text/javascript">
+  $(document).ready(() => {
+    $(".gym_location").on("change", () => {
+      let selected_location = $('select[name="gym_location"] :selected').attr(
+        "class"
+      );
+      if (selected_location) {
+        if (selected_location === "kotkantie_1") {
+          //$(".kotkantie_1_room").css("display", "block");
+          // $(".kotkantie_1_room").show();
+          $(".hanhitie_17_room").remove();
+          $(".peltolankaari_6B_room").remove();
+          $(
+            "" +
+              '<div class="form-group kotkantie_1_room">' +
+              ' <label for="room_number">Room Number</label>' +
+              '<select class="custom-select" id="room_number" name="room_number">' +
+              '<option selected value=""> Select Room number from the list</option>' +
+              '<option value="201"> 401</option>' +
+              '<option value="202"> 402</option>' +
+              '<option value="203">403</option>' +
+              '<option value="204">404 </option>' +
+              '<option value="205"> 405</option>' +
+              '<option value="206">406</option>' +
+              '<option value="207"> 407</option>' +
+              '<option value="208"> 408</option>' +
+              " </select>" +
+              "  </div>" +
+              +""
+          ).insertAfter($(".location"));
+        }
+        if (selected_location === "peltolankaari_6B") {
+          // //$(".peltolankaari_6B_room").css("display", "block");
+          $(".kotkantie_1_room").remove();
+          $(".hanhitie_17_room").remove();
+          // $(".peltolankaari_6B_room").show();
+          $(
+            "" +
+              ' <div class="form-group peltolankaari_6B_room">' +
+              '  <label for="room_number">Room Number</label>' +
+              '<select class="custom-select" id="room_number" name="room_number">' +
+              ' <option selected value=""> Select Room number from the list</option>' +
+              ' <option value="201"> 201</option>' +
+              ' <option value="202"> 202</option>' +
+              ' <option value="203">203</option>' +
+              ' <option value="204">204 </option>' +
+              ' <option value="205"> 205</option>' +
+              ' <option value="206">206</option>' +
+              ' <option value="207"> 207</option>' +
+              ' <option value="208"> 208</option>' +
+              " </select>" +
+              "  </div>" +
+              +""
+          ).insertAfter($(".location"));
+        }
+        if (selected_location === "hanhitie_17") {
+          // $(".hanhitie_17_room").css("display", "block");
+          // $(".hanhitie_17_room").show();
+          $(".kotkantie_1_room").remove();
+          $(".peltolankaari_6B_room").remove();
+          $(
+            "" +
+              '<div class="form-group hanhitie_17_room">' +
+              ' <label for="room_number">Room Number</label>' +
+              '<select class="custom-select" id="room_number" name="room_number">' +
+              '<option selected value=""> Select Room number from the list</option>' +
+              '<option value="201"> 101</option>' +
+              '<option value="202"> 102</option>' +
+              '<option value="203">103</option>' +
+              '<option value="204">104 </option>' +
+              '<option value="205"> 105</option>' +
+              '<option value="206">106</option>' +
+              '<option value="207"> 107</option>' +
+              '<option value="208"> 108</option>' +
+              "</select>" +
+              "</div>" +
+              +""
+          ).insertAfter($(".location"));
+        }
+      }
+    });
+  });
+</script>
 <% include partials/footers/footer.ejs %>
