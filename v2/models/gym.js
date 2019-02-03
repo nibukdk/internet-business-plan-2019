@@ -5,21 +5,12 @@ Schema = mongoose.Schema;
 const GymSchema = new mongoose.Schema({
   location: {
     type: String,
-    required: true
+    enum: ["Kotkantie 1 ", "Peltolankaari 6B", "Hanhitie 17"]
   },
-  total_accomodation: {
+
+  rooms: {
     type: String,
-    required: true
-  },
-  facilities: [
-    {
-      required: true,
-      type: String
-    }
-  ],
-  time_open: {
-    type: String,
-    required: true
+    enum: ["201", "202", "203", "204", "205", "206", "207", "208"]
   }
 });
 
