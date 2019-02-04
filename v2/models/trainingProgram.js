@@ -25,12 +25,7 @@ const TrainingProgramSchema = new Schema({
     type: String,
     required: true
   },
-  //Location of gym if multiple locations
-  location: {
-    type: String,
-    required: true,
-    default: "Oulu"
-  },
+  
   //Time of day
   start_time: {
     type: String,
@@ -80,9 +75,7 @@ const TrainingProgramSchema = new Schema({
     type: Schema.Types.ObjectId
   },
   //Gym_location
-  //Stored like [address, room_num]
-  //For eg: keskusta 11, 301,
-  gym_location: {
+    gym_location: {
     type: String,
     required: true
   },

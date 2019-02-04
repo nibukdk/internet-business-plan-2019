@@ -16,7 +16,11 @@ router.use((req, res, next) => {
 });
 router.get("/", authencation.adminLoggedIn, (req, res) => {
   const page = { title: "Admin" };
-  res.status(200).render("admin", { page: page });
+  TrainingProgramModel.find({})
+    .then(program => {
+      res.status(200).render("admin", { page: page, events: program });
+    })
+    .catch(err => res.status(400).json(err));
 });
 
 router.get("/set-program", authencation.adminLoggedIn, (req, res) => {
@@ -27,8 +31,9 @@ router.get("/set-program", authencation.adminLoggedIn, (req, res) => {
 });
 
 router.post("/set-program", authencation.adminLoggedIn, (req, res) => {
-  console.log( req.body);
+  console.log(req.body);
   const { errors, isValid } = validateTrainProgramInput(req.body);
+  const page = { title: "Homepage" };
 
   const TrainingProgram = {};
   if (isValid) {
@@ -48,24 +53,29 @@ router.post("/set-program", authencation.adminLoggedIn, (req, res) => {
       (TrainingProgram.total_seat = req.body.total_seat),
       (TrainingProgram.seats_taken = req.body.seats_taken),
       (TrainingProgram.created_by = req.user.id);
-    new TrainingProgramModel(TrainingProgram)
-      .save()
-      .then(program => res.json(program)); //Later add views here
+    // //new TrainingProgramModel(TrainingProgram)
+    //   .save()
+    TrainingProgramModel.create(TrainingProgram)
+      .then(program => res.redirect("admin"))
+      .catch(err => {
+        res.status(400).json(err);
+      });
   } else {
     res.status(400).json(errors);
   }
 });
+
 //Get program edit
 router.get("/edit_program/:id", authencation.adminLoggedIn, (req, res) => {
   const errors = {};
-
+  const page = { title: "Edit Event" };
   TrainingProgramModel.findById(req.params.id)
     .then(program => {
       if (!program) {
         console.log("Program not found");
         res.status(404).json((errors.msg = "Requested program not found"));
       } else {
-        // res.render('edit',{program:program})
+       // res.status(200).render("edit", { page: page, event: program });
         res.status(200).json(program);
         //console.log(program);
       }
