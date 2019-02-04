@@ -1,69 +1,48 @@
-<% include  partials/headers/header.ejs %>
+<% include partials/headers/header.ejs %>
 
 <section class="jumbotron text-center bg-light">
-    <div class="container">
-      <h1 class="jumbotron-heading">WELCOME TO GYMOID FOR LIIKKU</h1>
-      <p class="lead text-muted">We have an easy-to-use web portal for managing the events for Liikku health center. Login and manage your business efficiently.</p>
-      <p>
-        <a href="/login" class="btn btn-primary my-2">LOGIN</a>
-       <!-- <a href="#" class="btn btn-secondary my-2">Secondary action</a> -->
-      </p>
-    </div>
-  </section>
+  <div class="container">
+    <h1 class="jumbotron-heading">WELCOME TO GYMOID FOR LIIKKU</h1>
+    <p class="lead text-muted">
+      We have an easy-to-use web portal for managing the events for Liikku
+      health center. Login and manage your business efficiently.
+    </p>
+    <p>
+      <a href="/login" class="btn btn-primary my-2">LOGIN</a>
+      <!-- <a href="#" class="btn btn-secondary my-2">Secondary action</a> -->
+    </p>
+  </div>
+</section>
 
-  <div class="album py-5">
-    <div class="container">
+<div class="row">
+  <% events.forEach(event => { %>
+  <div class="col-md-6 col-lg-6 col-sm-4">
+    <div class="card bg-light ">
+      <h5 class="card-header">
+        <%= event.title %>
+        <span class="float-right"
+          ><%= event.total_seat%>/ <%= event.seats_taken %></span
+        >
+      </h5>
 
-      <div class="row">
-        <div class="col-md-4">
-          <div class="card mb-4 box-shadow">
-            <img class="card-img-top" data-src="" alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" data-holder-rendered="true">
-            <!--<div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div>
-                <small class="text-muted">9 mins</small>
-              </div>
-            </div>-->
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card mb-4 box-shadow">
-            <img class="card-img-top" data-src="" alt="Thumbnail [100%x225]" src="https://images.unsplash.com/photo-1534258936925-c58bed479fcb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1489&q=80" data-holder-rendered="true" style="height: 225px; width: 100%; display: block;">
-            <!--<div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div>
-                <small class="text-muted">9 mins</small>
-              </div>
-            </div>-->
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card mb-4 box-shadow">
-            <img class="card-img-top" data-src="" alt="Thumbnail [100%x225]" src="https://images.unsplash.com/photo-1536922246289-88c42f957773?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1980&q=80" data-holder-rendered="true" style="height: 225px; width: 100%; display: block;">
-            <!--<div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div>
-                <small class="text-muted">9 mins</small>
-              </div>
-            </div>-->
-          </div>
-        </div>   
+      <div class="card-body">
+        <h5 class="card-title"><%= event.instructor %></h5>
+        <h6 class="card-subtitle mb-2 text-muted">
+          <%= event.start_date.toDateString()%>-<%=
+          event.end_date.toDateString() %>, <%= event.start_time %>-<%=
+          event.end_time %>
+        </h6>
+        <p class="card-text">
+          <%= event.description %>
+        </p>
+        <a href="#" class="btn btn-primary">Enroll Me </a>
+      </div>
+      <div class="card-footer text-muted">
+        Location: <%= event.gym_location %>, <%= event.room_number %>
       </div>
     </div>
   </div>
+  <% })%>
+</div>
 
-</main>
-
-<% include  partials/footers/footer.ejs %>
+<% include partials/footers/footer.ejs %>

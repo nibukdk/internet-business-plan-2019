@@ -7,6 +7,7 @@ const express = require("express"),
   LocalStrategy = require("passport-local"),
   User = require("./models/user"),
   app = express();
+const TrainingProgramModel = require("./models/trainingProgram");
 
 //Import Routes
 // const userRoute = require("./routes/userRoute");
@@ -63,10 +64,7 @@ const db = require("./config/keys").mongoURI;
 
 //Connect to mongo
 mongoose
-  .connect(
-    db,
-    { useNewUrlParser: true, useCreateIndex: true }
-  )
+  .connect(db, { useNewUrlParser: true, useCreateIndex: true })
   .then(success => console.log("Connected to Db"))
   .catch(err => console.log(err));
 
@@ -79,11 +77,19 @@ app.use((req, res, next) => {
 //Home page
 app.get("/", (req, res) => {
   const page = { title: "Home" };
-  res.render("index.ejs", { page: page });
+  TrainingProgramModel.find({})
+    .then(events => {
+      res.render("index.ejs", { page: page, events: events });
+    })
+    .catch(err => res.status(400).json(err));
 });
 app.get("/home", (req, res) => {
   const page = { title: "Home" };
-  res.render("index.ejs", { page: page });
+  TrainingProgramModel.find({})
+    .then(events => {
+      res.render("index.ejs", { page: page, events: events });
+    })
+    .catch(err => res.status(400).json(err));
 });
 //Logout
 app.get("/logout", (req, res) => {
