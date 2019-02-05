@@ -70,13 +70,13 @@ router.get("/edit_program/:id", authencation.adminLoggedIn, (req, res) => {
   const errors = {};
   const page = { title: "Edit Event" };
   TrainingProgramModel.findById(req.params.id)
-    .then(program => {
-      if (!program) {
+    .then(event => {
+      if (!event) {
         console.log("Program not found");
         res.status(404).json((errors.msg = "Requested program not found"));
       } else {
-       // res.status(200).render("edit", { page: page, event: program });
-        res.status(200).json(program);
+        res.status(200).render("editEvent", { page: page, event: event });
+        // res.status(200).json(program);
         //console.log(program);
       }
     })
@@ -85,41 +85,40 @@ router.get("/edit_program/:id", authencation.adminLoggedIn, (req, res) => {
     });
 });
 
-// //post program edit
-// router.put(
-//   "/edit_program/:id",
-//   passport.authenticate("JWT", { session: false }),
-//   (req, res) => {
-//     const TrainingProgram = {},
-//       errors = {};
-//     (TrainingProgram.title = req.body.title),
-//       (TrainingProgram.instructor = req.body.instructor),
-//       (TrainingProgram.target = req.body.target),
-//       (TrainingProgram.program_type = req.body.program_type),
-//       (TrainingProgram.location = req.body.location),
-//       (TrainingProgram.time = req.body.time),
-//       (TrainingProgram.day = req.body.day),
-//       (TrainingProgram.start_date = req.body.start_date),
-//       (TrainingProgram.end_date = req.body.end_date),
-//       (TrainingProgram.description = req.body.description),
-//       (TrainingProgram.total_seat = req.body.total_seat),
-//       (TrainingProgram.seats_taken = req.body.seats_taken);
+//post program edit
+router.put("/edit_program/:id", authencation.adminLoggedIn, (req, res) => {
+  const TrainingProgram = {},
+    errors = {};
+  (TrainingProgram.title = req.body.title),
+    (TrainingProgram.instructor = req.body.instructor),
+    (TrainingProgram.target = req.body.target),
+    (TrainingProgram.program_type = req.body.program_type),
+    (TrainingProgram.gym_location = req.body.gym_location),
+    (TrainingProgram.room_number = req.body.room_number),
+    (TrainingProgram.start_time = req.body.start_time),
+    (TrainingProgram.end_time = req.body.end_time),
+    (TrainingProgram.day = req.body.day),
+    (TrainingProgram.start_date = req.body.start_date),
+    (TrainingProgram.end_date = req.body.end_date),
+    (TrainingProgram.description = req.body.description),
+    (TrainingProgram.total_seat = req.body.total_seat),
+    (TrainingProgram.seats_taken = req.body.seats_taken),
+    (TrainingProgram.created_by = req.user.id);
 
-//     TrainingProgramModel.findById(req.params.id)
-//       .then(program => {
-//         if (!program) {
-//           res.status(404).json((errors.msg = "Requested program not found"));
-//         } else {
-//           //If program is found then update
-//           program.updateOne(TrainingProgram).exec();
-//           res.status(200).json(program);
-//           //res.status(200).render("name of view", { program });
-//         }
-//       })
-//       .catch(err => {
-//         throw err;
-//       });
-//   }
-// );
+  TrainingProgramModel.findById(req.params.id)
+    .then(event => {
+      if (!event) {
+        res.status(404).redirect("back");
+      } else {
+        //If program is found then update
+        event.updateOne(TrainingProgram).exec();
+        res.redirect("/admin");
+        //res.status(200).render("name of view", { program });
+      }
+    })
+    .catch(err => {
+      throw err;
+    });
+});
 
 module.exports = router;

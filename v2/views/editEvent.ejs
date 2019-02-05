@@ -1,5 +1,5 @@
 <% include partials/headers/header.ejs %>
-<form method="POST">
+<form method="POST" action="/admin/edit_program/<%= event._id %>?_method=PUT">
   <div class="form-group">
     <label for="title">Title</label>
     <input
@@ -7,7 +7,7 @@
       class="form-control"
       id="title"
       name="title"
-      placeholder="program title"
+      value="<%= event.title %>"
     />
   </div>
 
@@ -35,7 +35,7 @@
       class="form-control"
       id="target"
       name="target"
-      placeholder="Target"
+      value="<%=event.target%>"
     />
   </div>
   <div class="form-group">
@@ -44,7 +44,7 @@
       type="text"
       class="form-control"
       id="program_type"
-      placeholder="Program Type like yoga, weights, dance etc"
+      value="<%=event.program_type %>"
       name="program_type"
     />
   </div>
@@ -56,7 +56,7 @@
         type="time"
         class="form-control"
         id="start_time"
-        placeholder="Start Time"
+        value="<%=event.start_time %>"
         name="start_time"
         min="04:00"
         max="22:00"
@@ -68,7 +68,7 @@
         type="time"
         class="form-control"
         id="end_time"
-        placeholder="End Time"
+        value="<%=event.end_time %>"
         name="end_time"
         min="04:00"
         max="22:00"
@@ -82,20 +82,12 @@
         type="date"
         class="form-control"
         id="start_date"
-        placeholder="Start date"
         name="start_date"
       />
     </div>
     <div class="form-group col-lg-6 col-md-6">
       <label for="end_date">To</label>
-      <input
-        type="date"
-        class="form-control"
-        id="end_date"
-        placeholder="End date"
-        name="end_date"
-       
-      />
+      <input type="date" class="form-control" id="end_date" name="end_date" />
     </div>
   </div>
   <div class="form-group ">
@@ -104,7 +96,7 @@
       type="text"
       class="form-control"
       id="day"
-      placeholder="Days of Week to repeat"
+      value="<%=event.day %>"
       name="day"
     />
   </div>
@@ -114,7 +106,7 @@
       type="number"
       class="form-control"
       id="total_seat"
-      placeholder="Provide total available seat"
+      value="<%=event.total_seat %>"
       name="total_seat"
     />
   </div>
@@ -135,15 +127,134 @@
   </div>
   <div class="form-group">
     <label for="description">Description</label>
-    <textarea class="form-control" id="description" rows="3" name="description">
+    <textarea
+      class="form-control"
+      id="description"
+      rows="3"
+      name="description"
+      
+    >
+    <%=event.description %>
     </textarea>
   </div>
   <button class="btn-lg btn-info">Submit</button>
 </form>
 
-
 <script type="text/javascript">
   $(document).ready(() => {
+    //Provide preselected values for select options from here
+    $("#instructor").val("<%=event.instructor %>");
+    $("#gym_location").val("<%=event.gym_location %>");
+    //xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx//
+    //To load room number with passed value, select based on gym_location
+    let selected_location = $('select[name="gym_location"] :selected').attr(
+      "class"
+    );
+    if (selected_location) {
+        if (selected_location === "kotkantie_1") {
+          //$(".kotkantie_1_room").css("display", "block");
+          // $(".kotkantie_1_room").show();
+          $(".hanhitie_17_room").remove();
+          $(".peltolankaari_6B_room").remove();
+          $(
+            "" +
+              '<div class="form-group kotkantie_1_room">' +
+              ' <label for="room_number">Room Number</label>' +
+              '<select class="custom-select" id="room_number" name="room_number">' +
+              '<option selected value=""> Select Room number from the list</option>' +
+              '<option value="201"> 401</option>' +
+              '<option value="202"> 402</option>' +
+              '<option value="203">403</option>' +
+              '<option value="204">404 </option>' +
+              '<option value="205"> 405</option>' +
+              '<option value="206">406</option>' +
+              '<option value="207"> 407</option>' +
+              '<option value="208"> 408</option>' +
+              " </select>" +
+              "  </div>" +
+              +""
+          ).insertAfter($(".location"));
+        }
+        if (selected_location === "peltolankaari_6B") {
+          // //$(".peltolankaari_6B_room").css("display", "block");
+          $(".kotkantie_1_room").remove();
+          $(".hanhitie_17_room").remove();
+          // $(".peltolankaari_6B_room").show();
+          $(
+            "" +
+              ' <div class="form-group peltolankaari_6B_room">' +
+              '  <label for="room_number">Room Number</label>' +
+              '<select class="custom-select" id="room_number" name="room_number">' +
+              ' <option selected value=""> Select Room number from the list</option>' +
+              ' <option value="201"> 201</option>' +
+              ' <option value="202"> 202</option>' +
+              ' <option value="203">203</option>' +
+              ' <option value="204">204 </option>' +
+              ' <option value="205"> 205</option>' +
+              ' <option value="206">206</option>' +
+              ' <option value="207"> 207</option>' +
+              ' <option value="208"> 208</option>' +
+              " </select>" +
+              "  </div>" +
+              +""
+          ).insertAfter($(".location"));
+        }
+        if (selected_location === "hanhitie_17") {
+          // $(".hanhitie_17_room").css("display", "block");
+          // $(".hanhitie_17_room").show();
+          $(".kotkantie_1_room").remove();
+          $(".peltolankaari_6B_room").remove();
+          $(
+            "" +
+              '<div class="form-group hanhitie_17_room">' +
+              ' <label for="room_number">Room Number</label>' +
+              '<select class="custom-select" id="room_number" name="room_number">' +
+              '<option selected value=""> Select Room number from the list</option>' +
+              '<option value="201"> 101</option>' +
+              '<option value="202"> 102</option>' +
+              '<option value="203">103</option>' +
+              '<option value="204">104 </option>' +
+              '<option value="205"> 105</option>' +
+              '<option value="206">106</option>' +
+              '<option value="207"> 107</option>' +
+              '<option value="208"> 108</option>' +
+              "</select>" +
+              "</div>" +
+              +""
+          ).insertAfter($(".location"));
+        }
+      }
+    $("#room_number").val("<%=event.room_number %>");
+   
+  //xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx//
+
+    //Function to convert time into required format
+    //Necessary for date input
+    const convert = str => {
+      const mnths = {
+          Jan: "01",
+          Feb: "02",
+          Mar: "03",
+          Apr: "04",
+          May: "05",
+          Jun: "06",
+          Jul: "07",
+          Aug: "08",
+          Sep: "09",
+          Oct: "10",
+          Nov: "11",
+          Dec: "12"
+        },
+        date = str.split(" ");
+
+      return [date[3], mnths[date[1]], date[2]].join("-");
+    };
+    $("#start_date").val(convert("<%=event.start_date %>"));
+    $("#end_date").val(convert("<%=event.end_date %>"));
+  //xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx//
+
+
+    //Change room number list based on gym location
     $(".gym_location").on("change", () => {
       let selected_location = $('select[name="gym_location"] :selected').attr(
         "class"
