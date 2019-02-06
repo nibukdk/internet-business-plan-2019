@@ -79,7 +79,11 @@ app.get("/", (req, res) => {
   const page = { title: "Home" };
   TrainingProgramModel.find({})
     .then(events => {
-      res.render("index.ejs", { page: page, events: events });
+      res.render("index.ejs", {
+        page: page,
+        events: events,
+        currentUser: req.user
+      });
     })
     .catch(err => res.status(400).json(err));
 });
@@ -87,7 +91,11 @@ app.get("/home", (req, res) => {
   const page = { title: "Home" };
   TrainingProgramModel.find({})
     .then(events => {
-      res.render("index.ejs", { page: page, events: events });
+      res.render("index.ejs", {
+        page: page,
+        events: events,
+        currentUser: req.user
+      });
     })
     .catch(err => res.status(400).json(err));
 });
@@ -95,7 +103,7 @@ app.get("/home", (req, res) => {
 app.get("/logout", (req, res) => {
   req.logout();
   //res.redirect("/");
-  res.send("You are now logged out");
+  res.redirect("/");
 });
 
 // app.use("/user", userRoute);

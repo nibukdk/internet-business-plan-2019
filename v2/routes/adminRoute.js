@@ -18,7 +18,11 @@ router.get("/", authencation.adminLoggedIn, (req, res) => {
   const page = { title: "Admin" };
   TrainingProgramModel.find({})
     .then(program => {
-      res.status(200).render("admin", { page: page, events: program });
+      res.status(200).render("admin", {
+        page: page,
+        events: program,
+        currentUser: req.user
+      });
     })
     .catch(err => res.status(400).json(err));
 });
@@ -27,7 +31,7 @@ router.get("/set-program", authencation.adminLoggedIn, (req, res) => {
   // res.json({ msg: "ok" });
   const page = { title: "New Routine" };
 
-  res.render("createProgram", { page: page });
+  res.render("createProgram", { page: page, currentUser: req.user });
 });
 
 router.post("/set-program", authencation.adminLoggedIn, (req, res) => {
@@ -75,7 +79,13 @@ router.get("/edit_program/:id", authencation.adminLoggedIn, (req, res) => {
         console.log("Program not found");
         res.status(404).json((errors.msg = "Requested program not found"));
       } else {
-        res.status(200).render("editEvent", { page: page, event: event });
+        res
+          .status(200)
+          .render("editEvent", {
+            page: page,
+            event: event,
+            currentUser: req.user
+          });
         // res.status(200).json(program);
         //console.log(program);
       }

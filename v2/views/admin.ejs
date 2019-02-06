@@ -53,36 +53,41 @@
         </div>
       </div>
     </div>
-    
-<div class="row">
-    <% events.forEach(event => { %>
-    <div class="col-md-6 col-lg-6 col-sm-4">
-      <div class="card bg-light ">
-        <h5 class="card-header">
-          <%= event.title %>
-          <span class="float-right"
-            ><%= event.total_seat%>/ <%= event.seats_taken %></span
-          >
-        </h5>
-  
-        <div class="card-body">
-          <h5 class="card-title"><%= event.instructor %></h5>
-          <h6 class="card-subtitle mb-2 text-muted">
-            <%= event.start_date.toDateString()%>-<%=
-            event.end_date.toDateString() %>, <%= event.start_time %>-<%=
-            event.end_time %>
-          </h6>
-          <p class="card-text">
-            <%= event.description %>
-          </p>
-          <a href="admin/edit_program/<%= event._id %>" class="btn btn-info btn-block">Edit </a>
+    <div class="contianer">
+      
+        <div class="row">
+         
+          <% events.forEach(event => { %>
+          <div class="col-md-6 col-lg-6 col-sm-4">
+            <div class="card bg-light ">
+              <h5 class="card-header">
+                <%= event.title %>
+                <span class="float-right"
+                  ><%= event.total_seat%>/ <%= event.seats_taken %></span
+                >
+              </h5>
+        
+              <div class="card-body">
+                <h5 class="card-title"><%= event.instructor %></h5>
+                <h6 class="card-subtitle mb-2 text-muted">
+                  <%= event.start_date.toDateString()%>-<%=
+                  event.end_date.toDateString() %>, <%= event.start_time %>-<%=
+                  event.end_time %>
+                </h6>
+                <p class="card-text">
+                  <%= event.description %>
+                </p>
+                <a href="admin/edit_program/<%= event._id %>" class="btn btn-info btn-block">Edit </a>
+              </div>
+              <div class="card-footer text-muted">
+                Location: <%= event.gym_location %>, <%= event.room_number %>
+              </div>
+            </div>
+          </div>
+          <% })%>
         </div>
-        <div class="card-footer text-muted">
-          Location: <%= event.gym_location %>, <%= event.room_number %>
-        </div>
-      </div>
+        
+     
     </div>
-    <% })%>
-  </div>
-  
+
 <% include partials/footers/footer.ejs %>

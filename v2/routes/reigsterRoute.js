@@ -20,14 +20,13 @@ router.use((req, res, next) => {
 //Registration route
 router.get("/", (req, res) => {
   const page = { title: "Register" };
-  res.status(200).render("register", { page: page });
+  res.status(200).render("register", { page: page, currentUser: req.user });
   //const page = { title: "Register" };
   //res.status(200).render("register", { page: page });
 });
 
 router.post("/", (req, res) => {
   const { errors, isValid } = validateRegisterInput(req.body);
-  console.log(req.body.memberCategory);
   //Check validation
   if (!isValid) {
     return res.status(400).json(errors);
@@ -55,7 +54,7 @@ router.post("/", (req, res) => {
               });
               User.register(newUser, password, (err, newUser) => {
                 if (err) {
-                  console.log(err);
+                  // console.log(err);
                   return res.redirect("back");
                   //res.send("Error");
                 }

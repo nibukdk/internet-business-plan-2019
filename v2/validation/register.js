@@ -24,6 +24,7 @@ module.exports = validateRegisterInput = data => {
   //     });
   //   };
 
+  //Switch category checking is its on the list of roles
   switch (category) {
     case "student":
       isOnList = true;

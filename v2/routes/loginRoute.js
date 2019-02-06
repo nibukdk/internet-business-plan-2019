@@ -23,9 +23,9 @@ router.get("/", (req, res) => {
     // return  res.render("login", { currentUser: currentUser });
     //  return res.status(200).json({ msg: "This is login page" });
     const page = { title: "Login", heading: "Login" };
-    res.status(200).render("login", { page: page });
+    res.status(200).render("login", { page: page, currentUser: req.user });
   } else {
-    res.status(200).json({ msg: "You are already logged in" });
+    res.status(400).redirect("back");
   }
   // res.status(200).json({ msg: "You are already logged in" });
 });
@@ -49,7 +49,7 @@ router.post("/", passportAuthenticate, (req, res) => {
     }
   );
 
-  //Check if user is admin or not IMPORTANT 
+  //Check if user is admin or not IMPORTANT
   if (req.user.memberCategory === "student") {
     return res.redirect("/");
   }
