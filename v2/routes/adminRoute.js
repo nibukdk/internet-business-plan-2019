@@ -60,7 +60,7 @@ router.post("/set-program", authencation.adminLoggedIn, (req, res) => {
     // //new TrainingProgramModel(TrainingProgram)
     //   .save()
     TrainingProgramModel.create(TrainingProgram)
-      .then(program => res.redirect("admin"))
+      .then(program => res.redirect("/admin"))
       .catch(err => {
         res.status(400).json(err);
       });
@@ -79,13 +79,11 @@ router.get("/edit_program/:id", authencation.adminLoggedIn, (req, res) => {
         console.log("Program not found");
         res.status(404).json((errors.msg = "Requested program not found"));
       } else {
-        res
-          .status(200)
-          .render("editEvent", {
-            page: page,
-            event: event,
-            currentUser: req.user
-          });
+        res.status(200).render("editEvent", {
+          page: page,
+          event: event,
+          currentUser: req.user
+        });
         // res.status(200).json(program);
         //console.log(program);
       }
@@ -131,4 +129,15 @@ router.put("/edit_program/:id", authencation.adminLoggedIn, (req, res) => {
     });
 });
 
+//delte program
+router.delete("/delete/:id", authencation.adminLoggedIn, (req, res) => {
+  TrainingProgramModel.findByIdAndRemove(req.params.id)
+    .then(success => {
+      res.status(200).redirect("/admin");
+    })
+    .catch(err => {
+      //res.status(400).redirect("back");
+      res.status(400).json(err);
+    });
+});
 module.exports = router;

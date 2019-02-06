@@ -77,7 +77,10 @@
                 <p class="card-text">
                   <%= event.description %>
                 </p>
-                <a href="admin/edit_program/<%= event._id %>" class="btn btn-info btn-block">Edit </a>
+                <a href="admin/edit_program/<%= event._id %>" class="btn btn-info btn-block edit_btn ">Edit </a>
+                <form class="delete_form" action="admin/delete/<%= event._id %>?_method=DELETE" method="POST">
+                  <button class="btn btn-danger btn-block delete_btn">Delete </button>
+                </form>
               </div>
               <div class="card-footer text-muted">
                 Location: <%= event.gym_location %>, <%= event.room_number %>

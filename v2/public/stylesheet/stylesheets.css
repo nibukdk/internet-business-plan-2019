@@ -6,6 +6,14 @@ form {
   padding: 5px;
 }
 
+.delete_form {
+  padding: none;
+  margin: none;
+  border: none;
+  width: 101%;
+  text-align: center;
+}
+
 input {
   outline: none;
 }
