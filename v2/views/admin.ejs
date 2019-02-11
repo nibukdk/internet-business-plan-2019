@@ -1,97 +1,85 @@
 <% include partials/headers/header.ejs %>
 
-
-<!-- Main Styles 
-    <link rel="stylesheet" href="css/styles.css"> -->
-
-<!--<nav class="navbar navbar-icon-top navbar-expand-lg navbar-light">
-  <a class="navbar-brand" href="#">John Smith</a>
-  <button
-    class="navbar-toggler"
-    type="button"
-    data-toggle="collapse"
-    data-target="#navbarSupportedContent"
-    aria-controls="navbarSupportedContent"
-    aria-expanded="false"
-    aria-label="Toggle navigation"
-  >
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto"></ul>
-    <ul class="navbar-nav ">
-      <li class="nav-item">
-        <a class="nav-link" href="#">
-          <i class="fa fa-envelope">
-            <span class="badge badge-danger">11</span>
-          </i>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">
-          <i class="fa fa-bell"> <span class="badge badge-info">11</span> </i>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">
-          <i class="fas fa-sign-out-alt"> </i> Logout
-        </a>
-      </li>
-    </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input
-        class="form-control mr-sm-2"
-        type="text"
-        placeholder="Search"
-        aria-label="Search"
-      />
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
-        Search
-      </button>
-    </form>
-  </div>
-</nav>-->
-	
-<!--<div class="navbar">
-  <div class="row">
-    <div class="column column-30 col-site-title"><a href="#" class="site-title float-left">Medialoot</a></div>
-    <div class="column column-40 col-search"><a href="#" class="search-btn fa fa-search"></a>
-      <input type="text" name="" value="" placeholder="Search..." />
-    </div>
-    <div class="column column-30">
-      <div class="user-section"><a href="#">
-        <img src="http://via.placeholder.com/50x50" alt="profile photo" class="circle float-left profile-photo" width="50" height="auto">
-        <div class="username">
-          <h4>Jane Donovan</h4>
-          <p>Administrator</p>
-        </div>
-      </a></div>
-    </div>
-  </div>
-</div>-->
-
-<!--<h1>Hey admin!</h1>
-<p class="text-center">Welcome to GYMOID control panel! You can manage the web site from this panel, see updates, and contacts.</em></p>-->
 <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-    <h1 class="display-4">Hey admin!</h1>
-    <p class="lead">Welcome to GYMOID control panel! You can manage the web site from this panel, see updates, and contacts.</p>
-  </div>
+  <h1 class="display-4">Hey admin!</h1>
+  <p class="lead">
+    Welcome to GYMOID control panel! You can manage the web site from this
+    panel, manage events, check instructor information.
+  </p>
+</div>
+<div class="container mt-3">
+  <h1>Instructors</h1>
+  <br />
+  <input class="form-control" id="myInput" type="text" placeholder="Search.." />
+  <br />
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Instructor</th>
+        <th scope="col">Expertise</th>
+        <th scope="col">Appointed classes</th>
+        <th scope="col">Joining date</th>
+        <th scope="col">Location</th>
+      </tr>
+    </thead>
+    <tbody id="myTable">
+      <tr>
+        <td>Jude Halberg</td>
+        <td>Bodycombat</td>
+        <td>3</td>
+        <td>11.12.2018</td>
+        <td>Kotkantie 1</td>
+      </tr>
+      <tr>
+        <td>Mark Otto</td>
+        <td>Poweryoga, Meditation</td>
+        <td>5</td>
+        <td>21.07.2018</td>
+        <td>Kotkantie 1</td>
+      </tr>
+      <tr>
+        <td>Shera Verrett</td>
+        <td>Poweryoga, Meditation</td>
+        <td>5</td>
+        <td>21.07.2018</td>
+        <td>Kotkantie 1</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
-  <div class="container">
-    <div class="card-deck mb-3 text-center">
+<script>
+  $(document).ready(function() {
+    $("#myInput").on("keyup", function() {
+      var value = $(this)
+        .val()
+        .toLowerCase();
+      $("#myTable tr").filter(function() {
+        $(this).toggle(
+          $(this)
+            .text()
+            .toLowerCase()
+            .indexOf(value) > -1
+        );
+      });
+    });
+  });
+</script>
+
+<!--<div class="card-deck mb-3 text-center">
       <div class="card mb-4 box-shadow">
         <div class="card-header">
           <h4 class="my-0 font-weight-normal">Members</h4>
         </div>
         <div class="card-body">
           <h1 class="card-title pricing-card-title">4200 <small class="text-muted"></small></h1>
-         <!-- <ul class="list-unstyled mt-3 mb-4">
+          <ul class="list-unstyled mt-3 mb-4">
             <li>10 users included</li>
             <li>2 GB of storage</li>
             <li>Email support</li>
             <li>Help center access</li>
           </ul>
-          <button type="button" class="btn btn-lg btn-block btn-outline-primary">Sign up for free</button>-->
+          <button type="button" class="btn btn-lg btn-block btn-outline-primary">Sign up for free</button>
         </div>
       </div>
       <div class="card mb-4 box-shadow">
@@ -100,13 +88,13 @@
         </div>
         <div class="card-body">
           <h1 class="card-title pricing-card-title">60 <small class="text-muted"></small></h1>
-          <!--<ul class="list-unstyled mt-3 mb-4">
+          <ul class="list-unstyled mt-3 mb-4">
             <li>20 users included</li>
             <li>10 GB of storage</li>
             <li>Priority email support</li>
             <li>Help center access</li>
           </ul>
-          <button type="button" class="btn btn-lg btn-block btn-primary">Get started</button>-->
+          <button type="button" class="btn btn-lg btn-block btn-primary">Get started</button>
         </div>
       </div>
       <div class="card mb-4 box-shadow">
@@ -115,79 +103,52 @@
         </div>
         <div class="card-body">
           <h1 class="card-title pricing-card-title">29 <small class="text-muted"></small></h1>
-          <!--<ul class="list-unstyled mt-3 mb-4">
+          <ul class="list-unstyled mt-3 mb-4">
             <li>30 users included</li>
             <li>15 GB of storage</li>
             <li>Phone and email support</li>
             <li>Help center access</li>
-          </ul>-->
-          <button type="button" class="btn btn-lg btn-block btn-primary">See all</button>
-        </div>
-      </div>
-    </div>
-
-<!--<div class="row">
-  <div id="sidebar" class="column">
-    <h5>Navigation</h5>
-    <ul>
-      <li><a href="#"><em class="fa fa-home"></em>Home</a></li>
-      <li><a href="#charts"><em class="fa fa-table"></em>Scheduled</a></li>
-      <li><a href="/admin/set-program"><em class="far fa-calendar-plus"></em>New event</a></li>
-      <li><a href="#forms"><em class="fa fa-pencil-square-o"></em>New client</a></li>
-      <li><a href="#alerts"><em class="far fa-address-card"></em>New instructor</a></li>
-      <li><a href="#buttons"><em class="fa fa-hand-o-up"></em> Buttons</a></li>
-      <li><a href="#tables"><em class="fa fa-table"></em> Tables</a></li>
-      <li><a href="#grid"><em class="fa fa-columns"></em> Grid</a></li> 
-    </ul>
-  </div>
-  <section class="column column-offset-20">
-    <div class="row grid-responsive">
-      <div class="column page-heading">
-        <div class="large-card">
-          <h1>Hey admin!</h1>
-          <p class="text-center">Welcome to GYMOID control panel! You can manage the web site from this panel, see updates, and contacts.</em></p>
+          </ul>
+          <button type="button" class="btn btn-lg btn-block btn-primary">See all</button> 
         </div>
       </div>
     </div>-->
-    
 
+<div class="contianer">
+  <div class="row">
+    <% events.forEach(event => { %>
+    <div class="col-md-6 col-lg-6 col-sm-4">
+      <div class="card bg-light ">
+        <h5 class="card-header">
+          <%= event.title %>
+          <span class="float-right"
+            ><%= event.total_seat%>/ <%= event.seats_taken %></span
+          >
+        </h5>
 
+        <div class="card-body">
+          <h5 class="card-title"><%= event.instructor %></h5>
+          <h6 class="card-subtitle mb-2 text-muted">
+            <%= event.start_date.toDateString()%>-<%=
+            event.end_date.toDateString() %>, <%= event.start_time %>-<%=
+            event.end_time %>
+          </h6>
+          <p class="card-text">
+            <%= event.description %>
+          </p>
+          <a
+            href="admin/edit_program/<%= event._id %>"
+            class="btn btn-info btn-block"
+            >Edit
+          </a>
+        </div>
+        <div class="card-footer text-muted">
+          Location: <%= event.gym_location %>, <%= event.room_number %>
+        </div>
+      </div>
+    </div>
+    <% })%>
+  </div>
+</div>
 
-<!--<script src="../js/chart.min.js"></script>
-<script src="../js/chart-data.js"></script>
-<script>
-window.onload = function () {
-  var chart1 = document.getElementById("line-chart").getContext("2d");
-  window.myLine = new Chart(chart1).Line(lineChartData, {
-  responsive: true,
-  scaleLineColor: "rgba(0,0,0,.2)",
-  scaleGridLineColor: "rgba(0,0,0,.05)",
-  scaleFontColor: "#c5c7cc"
-  });
-  var chart2 = document.getElementById("bar-chart").getContext("2d");
-  window.myBar = new Chart(chart2).Bar(barChartData, {
-  responsive: true,
-  scaleLineColor: "rgba(0,0,0,.2)",
-  scaleGridLineColor: "rgba(0,0,0,.05)",
-  scaleFontColor: "#c5c7cc"
-  });
-  var chart4 = document.getElementById("pie-chart").getContext("2d");
-  window.myPie = new Chart(chart4).Pie(pieData, {
-  responsive: true,
-  segmentShowStroke: false
-  });
-  var chart5 = document.getElementById("radar-chart").getContext("2d");
-  window.myRadarChart = new Chart(chart5).Radar(radarData, {
-  responsive: true,
-  scaleLineColor: "rgba(0,0,0,.05)",
-  angleLineColor: "rgba(0,0,0,.2)"
-  });
-  var chart6 = document.getElementById("polar-area-chart").getContext("2d");
-  window.myPolarAreaChart = new Chart(chart6).PolarArea(polarData, {
-  responsive: true,
-  scaleLineColor: "rgba(0,0,0,.2)",
-  segmentShowStroke: false
-  });
-};
-</script>			-->
 <% include partials/footers/footer.ejs %>
