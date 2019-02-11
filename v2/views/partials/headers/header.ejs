@@ -7,14 +7,6 @@
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
 
-    <!-- Bootstrap CSS -->
-    <!--<link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-      crossorigin="anonymous"
-    /> -->
-
     <link
       href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
       rel="stylesheet"
@@ -31,26 +23,12 @@
       integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
       crossorigin="anonymous"
     />
-    <!--script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-->
-
-    <!-- Google Fonts 
-    <link
-      href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700"
-      rel="stylesheet"
-    />-->
-
-    <!-- Template Styles 
-    <link rel="stylesheet" href="css/font-awesome.min.css" /> -->
-
-    <!-- CSS Reset 
-    <link rel="stylesheet" href="css/normalize.css" /> -->
-
-    <!-- Milligram CSS minified 
-    <link rel="stylesheet" href="css/milligram.min.css" /> -->
-
-    <!-- Main Styles 
-    <link rel="stylesheet" href="css/styles.css"> -->
+    <!-- jquery link  -->
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.js"
+      integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+      crossorigin="anonymous"
+    ></script>
 
     <title><%= page.title %></title>
   </head>
@@ -59,7 +37,7 @@
       <div class="row">
         <div class="col-lg-12 col-sm-9">
           <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a class="navbar-brand" href="#">GYMOID</a>
+            <a class="navbar-brand" href="/">Gymoid</a>
             <button
               class="navbar-toggler"
               type="button"
@@ -79,47 +57,37 @@
                     >Home <span class="sr-only">(current)</span></a
                   >
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="/login">Login </a>
-                </li>
+                <% if(currentUser){ %> <% if(currentUser.memberCategory !==
+                "student") { %>
                 <li class="nav-item">
                   <a class="nav-link" href="/register">Register</a>
                 </li>
 
                 <li class="nav-item">
-                  <a class="nav-link" href="">Scheduled</a>
+                  <a class="nav-link" href="">Events</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="/admin/set-program">New event</a>
+                  <a class="nav-link" href="/admin">Dashboard</a>
                 </li>
-
+                <li class="nav-item">
+                  <a class="nav-link" href="/admin/set-program">New Event</a>
+                </li>
+                <%} %>
                 <li class="nav-item">
                   <a class="nav-link" href="/logout">Log out </a>
                 </li>
+                <% } else { %>
 
-                <!--  <li class="nav-item dropdown">
-                  <a
-                    class="nav-link dropdown-toggle"
-                    href="/"
-                    id="dropdown05"
-                    data-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                    >Dropdown</a
-                  >
-                   <div class="dropdown-menu" aria-labelledby="dropdown05">
-                    <a class="dropdown-item" href="/login">Login</a>
-                    <a class="dropdown-item" href="/register">Register</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                  </div>
-                </li>-->
+                <li class="nav-item">
+                  <a class="nav-link" href="/login">Login </a>
+                </li>
+
+                <%}%>
               </ul>
-              <!--
-          <form class="form-inline my-2 my-md-0">
-          <input class="form-control" type="text" placeholder="Search" />
-        </form>
-        -->
             </div>
+           <script>
+
+           </script>
           </nav>
         </div>
       </div>
