@@ -1,10 +1,5 @@
 const express = require("express"),
-  bodyParser = require("body-parser"),
-  passport = require("passport"),
-  jwt = require("passport-jwt"),
-  router = express.Router(),
-  date = require("date-and-time");
-
+  router = express.Router();
 const authencation = require("../middlewares/authentication");
 const validateTrainProgramInput = require("../validation/trainingProgram");
 

@@ -1,9 +1,7 @@
 const express = require("express"),
-  bodyParser = require("body-parser"),
+ 
   passport = require("passport"),
-  jwt = require("passport-jwt"),
   router = express.Router();
-const Profile = require("../models/profile");
 
 router.get("/", (req, res) => {
   res.send("THis is admin homepage");
