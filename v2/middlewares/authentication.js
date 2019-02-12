@@ -23,8 +23,23 @@ module.exports.isLoggedInMiddleWare = isLoggedInMiddleWare = (
   res.redirect("/login");
 };
 
+//Check if logged user is admin
 module.exports.adminLoggedIn = adminLoggedIn = (req, res, next) => {
   if (req.isAuthenticated() && req.user.memberCategory !== "student") {
+    return next();
+  }
+  // req.flash("error", "You are not allowed for this route");
+  // res.redirect("/");
+  //Later change this to customer link 
+  const page = { title: "Login" };
+  res
+    .status(403)
+    .redirect("/login");
+};
+
+// Check if user is client
+module.exports.clientLoggedIn = clientLoggedIn = (req, res, next) => {
+  if (req.isAuthenticated() && req.user.memberCategory === "student") {
     return next();
   }
   // req.flash("error", "You are not allowed for this route");

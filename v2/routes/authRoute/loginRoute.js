@@ -51,7 +51,7 @@ router.post("/", passportAuthenticate, (req, res) => {
 
   //Check if user is admin or not IMPORTANT
   if (req.user.memberCategory === "student") {
-    return res.redirect("/");
+    return res.redirect("/client");
   }
   res.redirect("/admin");
 });

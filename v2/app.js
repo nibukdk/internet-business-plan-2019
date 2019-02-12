@@ -113,7 +113,7 @@ app.get("/logout", (req, res) => {
 app.use("/admin", adminRoute);
 app.use("/register", registerRoute);
 app.use("/login", loginRoute);
-app.use("/user", clientRoute);
+app.use("/client", clientRoute);
 
 app.listen(PORT || process.env.PORT, err => {
   console.log("App is running at ", PORT);
