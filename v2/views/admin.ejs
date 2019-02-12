@@ -1,83 +1,113 @@
 <% include partials/headers/header.ejs %>
-<p class="text-center">Welcome to GYMOID control panel! You can manage the web site from this panel, see updates, and contacts.</em></p>
+
 <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-    <h1 class="display-4">Hey admin!</h1>
-    <p class="lead">Welcome to GYMOID control panel! You can manage the web site from this panel, see updates, and contacts.</p>
+  <h1 class="display-4">Hey admin!</h1>
+  <p class="lead">
+    Welcome to GYMOID control panel! You can manage the web site from this
+    panel, manage events, check instructor information.
+  </p>
+</div>
+<div class="container mt-3">
+  <h1>Instructors</h1>
+  <br />
+  <input class="form-control" id="myInput" type="text" placeholder="Search.." />
+  <br />
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Instructor</th>
+        <th scope="col">Expertise</th>
+        <th scope="col">Appointed classes</th>
+        <th scope="col">Joining date</th>
+        <th scope="col">Location</th>
+      </tr>
+    </thead>
+    <tbody id="myTable">
+      <tr>
+        <td>Jude Halberg</td>
+        <td>Bodycombat</td>
+        <td>3</td>
+        <td>11.12.2018</td>
+        <td>Kotkantie 1</td>
+      </tr>
+      <tr>
+        <td>Mark Otto</td>
+        <td>Poweryoga, Meditation</td>
+        <td>5</td>
+        <td>21.07.2018</td>
+        <td>Kotkantie 1</td>
+      </tr>
+      <tr>
+        <td>Shera Verrett</td>
+        <td>Poweryoga, Meditation</td>
+        <td>5</td>
+        <td>21.07.2018</td>
+        <td>Kotkantie 1</td>
+      </tr>
+    </tbody>
+  </table>
 </div>
 
-    <div class="card-deck mb-3 text-center">
-      <div class="card mb-4 box-shadow">
-        <div class="card-header">
-          <h4 class="my-0 font-weight-normal">Members</h4>
-        </div>
+<script>
+  $(document).ready(function() {
+    $("#myInput").on("keyup", function() {
+      var value = $(this)
+        .val()
+        .toLowerCase();
+      $("#myTable tr").filter(function() {
+        $(this).toggle(
+          $(this)
+            .text()
+            .toLowerCase()
+            .indexOf(value) > -1
+        );
+      });
+    });
+  });
+</script>
+
+<div class="contianer">
+  <div class="row">
+    <% events.map(event => { %>
+    <div class="col-md-6 col-lg-6 col-sm-4">
+      <div class="card bg-light ">
+        <h5 class="card-header">
+          <%= event.title %>
+          <span class="float-right"
+            ><%= event.total_seat%>/ <%= event.seats_taken %></span
+          >
+        </h5>
+
         <div class="card-body">
-          <h1 class="card-title pricing-card-title">4200 <small class="text-muted"></small></h1>   
+          <h5 class="card-title"><%= event.instructor %></h5>
+          <h6 class="card-subtitle mb-2 text-muted">
+            <%= event.start_date.toDateString().substring(0,11)%> -<%=
+            event.end_date.toDateString().substring(0,11) %>, <%=
+            event.start_time %>-<%= event.end_time %>
+          </h6>
+          <p class="card-text">
+            <%= event.description %>
+          </p>
+          <a
+            href="admin/edit_program/<%= event._id %>"
+            class="btn btn-info btn-block edit_btn "
+            >Edit
+          </a>
+          <!-- <form
+            class="delete_form"
+            action="admin/delete/<%= event._id %>?_method=DELETE"
+            method="POST"
+          >
+            <button class="btn btn-danger btn-block delete_btn">Delete</button>
+          </form> -->
         </div>
-      </div>
-      <div class="card mb-4 box-shadow">
-        <div class="card-header">
-          <h4 class="my-0 font-weight-normal">Instructors</h4>
-        </div>
-        <div class="card-body">
-          <h1 class="card-title pricing-card-title">60 <small class="text-muted"></small></h1>
-          
-        </div>
-      </div>
-      <div class="card mb-4 box-shadow">
-        <div class="card-header">
-          <h4 class="my-0 font-weight-normal">Messages</h4>
-        </div>
-        <div class="card-body">
-          <h1 class="card-title pricing-card-title">29 <small class="text-muted"></small></h1>
-       
-          <button type="button" class="btn btn-lg btn-block btn-primary">See all</button>
+        <div class="card-footer text-muted">
+          Location: <%= event.gym_location %>, <%= event.room_number %>
         </div>
       </div>
     </div>
-    <div class="contianer">
-        <div class="row">
-         
-          <% events.map(event => { %>
-          <div class="col-md-6 col-lg-6 col-sm-4">
-            <div class="card bg-light ">
-              <h5 class="card-header">
-                <%= event.title %>
-                <span class="float-right"
-                  ><%= event.total_seat%>/ <%= event.seats_taken %></span
-                >
-              </h5>
-        
-              <div class="card-body">
-                <h5 class="card-title"><%= event.instructor %></h5>
-                <h6 class="card-subtitle mb-2 text-muted">
-                  <%= event.start_date.toDateString().substring(0,11)%> - <%=
-                  event.end_date.toDateString().substring(0,11) %>, <%= event.start_time %>-<%=
-                  event.end_time %>
-                </h6>
-                <p class="card-text">
-                  <%= event.description %>
-                </p>
-                <a href="admin/edit_program/<%= event._id %>" class="btn btn-info btn-block edit_btn ">Edit </a>
-                <form class="delete_form" action="admin/delete/<%= event._id %>?_method=DELETE" method="POST">
-                  <button class="btn btn-danger btn-block delete_btn">Delete </button>
-                </form>
-              </div>
-              <div class="card-footer text-muted">
-                Location: <%= event.gym_location %>, <%= event.room_number %>
-              </div>
-            </div>
-          </div>
-          <% })%>
-        </div>
-        
-     
-    </div>
-    <!-- <script type="text/javascript">
-      $(document).ready(() => {
-        $('.btn-group .btn').on('click', () => {
-            $(this).addClass('active');
-         // console.log('clicked')
-        });
-     });
-   </script> -->
+    <% })%>
+  </div>
+</div>
+
 <% include partials/footers/footer.ejs %>

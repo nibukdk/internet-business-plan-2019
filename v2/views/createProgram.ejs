@@ -13,16 +13,22 @@
 
   <div class="form-group">
     <label for="instructor">Instructor</label>
-    <select class="custom-select" id="instructor" name="instructor">
-      <option selected value=""> Select Instructor from the list</option>
-      <option value="Charlie Couto"> Charlie Couto</option>
-      <option value="Shera Verrett"> Shera Verrett</option>
-      <option value="Jude Halberg">Jude Halberg </option>
-      <option value="Orpha Sala">Orpha Sala </option>
-      <option value="Vicki Vinci"> Vicki Vinci</option>
-      <option value="Brady Sheely"> Brady Sheely</option>
-    </select>
-
+    <input type="text" class="form-control" list="instructors" name="instructor" /></label>
+    <datalist id="instructors">
+      <option value="Charlie Couto">
+      <option value="Shera Verrett">
+      <option value="Jude Halberg">
+      <option value="Orpha Sala">
+      <option value="Vicki Vinci">
+      <option value="Brady Sheely">
+    </datalist>
+    <!--<input
+      type="text"
+      class="form-control"
+      id="instructor"
+      name="instructor"
+      placeholder="Instructor"
+    />-->
     <small id="instructor" class="form-text text-muted"
       >Leave empty for self taining</small
     >
