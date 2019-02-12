@@ -99,3 +99,20 @@ html {
 .card {
   margin: 1rem;
 }
+.btn-group .btn {
+  background: #eeeeee;
+  color: #000;
+}
+.btn-group .btn:hover,
+.btn-group .btn:focus {
+  background: #424242;
+  color: #fff;
+  outline: none;
+  border: none;
+}
+/* .btn-group .btn:focus {
+  background: #00695c;
+  color: black;
+  outline: none;
+  border: none;
+} */

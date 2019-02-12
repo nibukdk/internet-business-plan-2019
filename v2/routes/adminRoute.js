@@ -1,19 +1,28 @@
 const express = require("express"),
-  bodyParser = require("body-parser"),
-  passport = require("passport"),
-  jwt = require("passport-jwt"),
   router = express.Router(),
-  date = require("date-and-time");
+  moment = require("moment");
 
 const authencation = require("../middlewares/authentication");
 const validateTrainProgramInput = require("../validation/trainingProgram");
 
 const TrainingProgramModel = require("../models/trainingProgram");
-//This proivdes info about local user or current user
 router.use((req, res, next) => {
   res.locals.user = req.user;
   next();
 });
+
+// --------------------------
+const startOfWeek = moment().startOf("week"),
+  endOfWeek = moment().endOf("week");
+
+const days = [];
+let day = startOfWeek;
+
+while (day <= endOfWeek) {
+  days.push(day.toDate().toDateString());
+  day = day.clone().add(1, "d");
+}
+//---------------------------
 router.get("/", authencation.adminLoggedIn, (req, res) => {
   const page = { title: "Admin" };
   TrainingProgramModel.find({})
@@ -21,14 +30,14 @@ router.get("/", authencation.adminLoggedIn, (req, res) => {
       res.status(200).render("admin", {
         page: page,
         events: program,
-        currentUser: req.user
+        currentUser: req.user,
+        daysOfWeek:days
       });
     })
     .catch(err => res.status(400).json(err));
 });
 
 router.get("/set-program", authencation.adminLoggedIn, (req, res) => {
-  // res.json({ msg: "ok" });
   const page = { title: "New Routine" };
 
   res.render("createProgram", { page: page, currentUser: req.user });
@@ -41,7 +50,6 @@ router.post("/set-program", authencation.adminLoggedIn, (req, res) => {
 
   const TrainingProgram = {};
   if (isValid) {
-    // res.status(200).json({msg:'This is admin set program page'})
     (TrainingProgram.title = req.body.title),
       (TrainingProgram.instructor = req.body.instructor),
       (TrainingProgram.target = req.body.target),
@@ -57,8 +65,7 @@ router.post("/set-program", authencation.adminLoggedIn, (req, res) => {
       (TrainingProgram.total_seat = req.body.total_seat),
       (TrainingProgram.seats_taken = req.body.seats_taken),
       (TrainingProgram.created_by = req.user.id);
-    // //new TrainingProgramModel(TrainingProgram)
-    //   .save()
+
     TrainingProgramModel.create(TrainingProgram)
       .then(program => res.redirect("/admin"))
       .catch(err => {
@@ -84,8 +91,6 @@ router.get("/edit_program/:id", authencation.adminLoggedIn, (req, res) => {
           event: event,
           currentUser: req.user
         });
-        // res.status(200).json(program);
-        //console.log(program);
       }
     })
     .catch(err => {
@@ -121,7 +126,6 @@ router.put("/edit_program/:id", authencation.adminLoggedIn, (req, res) => {
         //If program is found then update
         event.updateOne(TrainingProgram).exec();
         res.redirect("/admin");
-        //res.status(200).render("name of view", { program });
       }
     })
     .catch(err => {
