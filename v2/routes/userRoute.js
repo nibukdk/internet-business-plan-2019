@@ -1,5 +1,7 @@
 const express = require("express"),
-  
+  bodyParser = require("body-parser"),
+  passport = require("passport"),
+  jwt = require("passport-jwt"),
   router = express.Router();
 //Set port for local server
 

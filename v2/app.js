@@ -14,7 +14,6 @@ const TrainingProgramModel = require("./models/trainingProgram");
 const adminRoute = require("./routes/adminRoute");
 const registerRoute = require("./routes/reigsterRoute");
 const loginRoute = require("./routes/loginRoute");
-const profileRoute = require("./routes/profileRoute");
 // const profileRotue = require("./routes/profileRoute");
 
 //Set port for local server
@@ -107,10 +106,12 @@ app.get("/logout", (req, res) => {
   res.redirect("/");
 });
 
+// app.use("/user", userRoute);
 app.use("/admin", adminRoute);
 app.use("/register", registerRoute);
 app.use("/login", loginRoute);
-app.use("/profile", profileRoute);
+// app.use("/profile", loginRoute);
+
 app.listen(PORT || process.env.PORT, err => {
   console.log("App is running at ", PORT);
 });

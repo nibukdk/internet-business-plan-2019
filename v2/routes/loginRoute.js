@@ -3,14 +3,12 @@ const express = require("express"),
   passport = require("passport"),
   User = require("../models/user.js");
 const validateLoginInput = require("../validation/login");
-
-
 //Find current user
 router.use((req, res, next) => {
   res.locals.user = req.user;
   next();
 });
-//Prevent navigating back using browser back button after logout
+//Prevent back button after logout
 router.use((req, res, next) => {
   res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
   res.header("Expires", "-1");
@@ -29,7 +27,7 @@ router.get("/", (req, res) => {
   } else {
     res.status(400).redirect("back");
   }
-  
+  // res.status(200).json({ msg: "You are already logged in" });
 });
 
 let passportAuthenticate = passport.authenticate("local", {
