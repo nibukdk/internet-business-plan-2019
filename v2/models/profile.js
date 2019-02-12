@@ -10,7 +10,8 @@ const ProfileSchema = new Schema({
   },
   isEmployee: {
     type: Boolean,
-    required: true
+    required: true,
+    default: false
   },
   birthDate: {
     type: String

@@ -6,15 +6,16 @@ const express = require("express"),
   methodOverride = require("method-override"),
   LocalStrategy = require("passport-local"),
   User = require("./models/user"),
+  path = require("path"),
   app = express();
 const TrainingProgramModel = require("./models/trainingProgram");
 
 //Import Routes
 // const userRoute = require("./routes/userRoute");
-const adminRoute = require("./routes/adminRoute");
-const registerRoute = require("./routes/reigsterRoute");
-const loginRoute = require("./routes/loginRoute");
-// const profileRotue = require("./routes/profileRoute");
+const adminRoute = require("./routes/adminRoute/adminRoute");
+const registerRoute = require("./routes/authRoute/reigsterRoute");
+const loginRoute = require("./routes/authRoute/loginRoute");
+const clientRoute = require("./routes/clientRoute/clientRotue");
 
 //Set port for local server
 const PORT = 8080;
@@ -27,6 +28,8 @@ app.use(bodyParser.json());
 
 //Set view engine
 app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "/views"));
+
 app.use(methodOverride("_method"));
 
 //use passport and set session
@@ -110,7 +113,7 @@ app.get("/logout", (req, res) => {
 app.use("/admin", adminRoute);
 app.use("/register", registerRoute);
 app.use("/login", loginRoute);
-// app.use("/profile", loginRoute);
+app.use("/user", clientRoute);
 
 app.listen(PORT || process.env.PORT, err => {
   console.log("App is running at ", PORT);

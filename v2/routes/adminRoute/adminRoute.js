@@ -1,9 +1,11 @@
 const express = require("express"),
   router = express.Router();
-const authencation = require("../middlewares/authentication");
-const validateTrainProgramInput = require("../validation/trainingProgram");
 
-const TrainingProgramModel = require("../models/trainingProgram");
+const authencation = require("../../middlewares/authentication");
+const validateTrainProgramInput = require("../../validation/trainingProgram");
+
+const TrainingProgramModel = require("../../models/trainingProgram");
+
 //This proivdes info about local user or current user
 router.use((req, res, next) => {
   res.locals.user = req.user;
@@ -13,7 +15,7 @@ router.get("/", authencation.adminLoggedIn, (req, res) => {
   const page = { title: "Admin" };
   TrainingProgramModel.find({})
     .then(program => {
-      res.status(200).render("admin", {
+      res.status(200).render("admin/admin", {
         page: page,
         events: program,
         currentUser: req.user
@@ -26,7 +28,7 @@ router.get("/set-program", authencation.adminLoggedIn, (req, res) => {
   // res.json({ msg: "ok" });
   const page = { title: "New Routine" };
 
-  res.render("createProgram", { page: page, currentUser: req.user });
+  res.render("admin/createProgram", { page: page, currentUser: req.user });
 });
 
 router.post("/set-program", authencation.adminLoggedIn, (req, res) => {
@@ -52,8 +54,7 @@ router.post("/set-program", authencation.adminLoggedIn, (req, res) => {
       (TrainingProgram.total_seat = req.body.total_seat),
       (TrainingProgram.seats_taken = req.body.seats_taken),
       (TrainingProgram.created_by = req.user.id);
-    // //new TrainingProgramModel(TrainingProgram)
-    //   .save()
+
     TrainingProgramModel.create(TrainingProgram)
       .then(program => res.redirect("/admin"))
       .catch(err => {
@@ -74,7 +75,7 @@ router.get("/edit_program/:id", authencation.adminLoggedIn, (req, res) => {
         console.log("Program not found");
         res.status(404).json((errors.msg = "Requested program not found"));
       } else {
-        res.status(200).render("editEvent", {
+        res.status(200).render("admin/editEvent", {
           page: page,
           event: event,
           currentUser: req.user

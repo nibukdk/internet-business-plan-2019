@@ -1,8 +1,8 @@
 const express = require("express"),
   router = express.Router(),
   passport = require("passport"),
-  User = require("../models/user.js");
-const validateLoginInput = require("../validation/login");
+  User = require("../../models/user.js");
+const validateLoginInput = require("../../validation/login");
 //Find current user
 router.use((req, res, next) => {
   res.locals.user = req.user;
@@ -23,7 +23,7 @@ router.get("/", (req, res) => {
     // return  res.render("login", { currentUser: currentUser });
     //  return res.status(200).json({ msg: "This is login page" });
     const page = { title: "Login", heading: "Login" };
-    res.status(200).render("login", { page: page, currentUser: req.user });
+    res.status(200).render("auth/login", { page: page, currentUser: req.user });
   } else {
     res.status(400).redirect("back");
   }

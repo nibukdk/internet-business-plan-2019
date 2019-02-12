@@ -1,9 +1,10 @@
 var express = require("express"),
   router = express.Router(),
   passport = require("passport"),
-  User = require("../models/user.js");
+  User = require("../../models/user.js"),
+  authentication = require("../../middlewares/authentication");
 
-const validateRegisterInput = require("../validation/register");
+const validateRegisterInput = require("../../validation/register");
 
 router.use((req, res, next) => {
   res.locals.user = req.user;
@@ -18,9 +19,11 @@ router.use((req, res, next) => {
 });
 
 //Registration route
-router.get("/", (req, res) => {
+router.get("/",authentication.isLoggedInMiddleWare, (req, res) => {
   const page = { title: "Register" };
-  res.status(200).render("register", { page: page, currentUser: req.user });
+  res
+    .status(200)
+    .render("auth//register", { page: page, currentUser: req.user });
   //const page = { title: "Register" };
   //res.status(200).render("register", { page: page });
 });
