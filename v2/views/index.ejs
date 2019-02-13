@@ -1,16 +1,21 @@
 <% include partials/headers/header.ejs %>
 
 <section class="jumbotron text-center bg-light">
-    <div class="container">
-      <h1 class="jumbotron-heading">WELCOME TO GYMOID FOR LIIKKU</h1>
-      <p class="lead text-muted">We have an easy-to-use web portal for managing the events for Liikku health center. Login and manage your business efficiently.</p>
-      <p>
-        <a href="/login" class="btn btn-primary my-2">LOGIN</a>
-      </p>
-    </div>
-  </section>
+  <div class="container">
+    <h1 class="jumbotron-heading">WELCOME TO GYMOID FOR LIIKKU</h1>
+    <p class="lead text-muted">
+      We have an easy-to-use web portal for managing the events for Liikku
+      health center. Login and manage your business efficiently.
+    </p>
+    <% if(!currentUser){ %>
+    <p>
+      <a href="/login" class="btn btn-primary my-2">LOGIN</a>
+    </p>
+    <% } %>
+  </div>
+</section>
 
-  <!-- <div class="album py-5">
+<!-- <div class="album py-5">
     <div class="container">
 
       <div class="row">
@@ -38,38 +43,47 @@
 
 </main> -->
 
+<div class="row">
+  <% events.map(event => { %>
+  <div class="col-md-6 col-lg-6 col-sm-4">
+    <div class="card bg-light ">
+      <h5 class="card-header">
+        <%= event.title %>
+        <span class="float-right"
+          ><%= event.total_seat%>/ <%= event.seats_taken %></span
+        >
+      </h5>
 
-  
- <div class="row">
-    <% events.map(event => { %>
-    <div class="col-md-6 col-lg-6 col-sm-4">
-      <div class="card bg-light ">
-        <h5 class="card-header">
-          <%= event.title %>
-          <span class="float-right"
-            ><%= event.total_seat%>/ <%= event.seats_taken %></span
-          >
-        </h5>
-  
-        <div class="card-body">
-          <h5 class="card-title"><%= event.instructor %></h5>
-          <h6 class="card-subtitle mb-2 text-muted">
-            <%= event.start_date.toDateString()%>-<%=
-            event.end_date.toDateString() %>, <%= event.start_time %>-<%=
-            event.end_time %>
-          </h6>
-          <p class="card-text">
-            <%= event.description %>
-          </p>
-          <a href="admin/edit_program/<%= event._id %>" class="btn btn-info btn-block">Edit </a>
-        </div>
-        <div class="card-footer text-muted">
-          Location: <%= event.gym_location %>, <%= event.room_number %>
-        </div>
+      <div class="card-body">
+        <h5 class="card-title"><%= event.instructor %></h5>
+        <h6 class="card-subtitle mb-2 text-muted">
+          <%= event.start_date.toDateString()%>-<%=
+          event.end_date.toDateString() %>, <%= event.start_time %>-<%=
+          event.end_time %>
+        </h6>
+        <p class="card-text">
+          <%= event.description %>
+        </p>
+        <% if(currentUser && currentUser.memberCategory !=="student"){ %>
+        <a href="admin/edit_program/<%= event._id %>" class="btn btn-info btn-block">Edit </a>
+        <% } %>
+        <!-- only display form if user is logged in and is client -->
+        <% if(currentUser && currentUser.memberCategory ==="student"){ %>
+        <form
+          class="join_form"
+          action="events/join/<%= event._id %>"
+          method="POST"
+        >
+          <button class="btn btn-primary btn-block join_btn">Join</button>
+        </form>
+        <% } %>
+      </div>
+      <div class="card-footer text-muted">
+        Location: <%= event.gym_location %>, <%= event.room_number %>
       </div>
     </div>
-    <% })%>
   </div>
+  <% })%>
+</div>
 
-
-<% include  partials/footers/footer.ejs %>
+<% include partials/footers/footer.ejs %>
