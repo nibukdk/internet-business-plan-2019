@@ -35,10 +35,10 @@ const UserSchema = mongoose.Schema({
     default: Date.now
   },
 
-  profile: {
-    ref: "profile",
-    type: Schema.Types.ObjectId
-  }
+  // profile: {
+  //   ref: "profile",
+  //   type: Schema.Types.ObjectId
+  // }
 });
 UserSchema.plugin(passportLocalMongoose);
 
