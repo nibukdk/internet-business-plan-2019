@@ -40,10 +40,15 @@ html {
   max-width: 960px;
 }
 
-.delete_form {
+.delete_form, .join_form, .cancel_form {
   padding: none;
   margin: none;
   border: none;
   width: 101%;
   text-align: center;
+}
+
+.client-event-card {
+  justify-content: center;
+  margin: 15px;
 }

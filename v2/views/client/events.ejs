@@ -1,5 +1,51 @@
 <% include ../partials/headers/header.ejs %>
 
-<h1>Client Events Page</h1>
+<h1 class="text-center" >Client Events Page</h1>
+<div class="contianer">
+  <div class="row ">
+   
+    <% events.map(event => { %>
+    <div class="col-md-12 col-lg-12 col-sm-9 ">
+      <div class="card bg-light client-event-card">
+        <h5 class="card-header">
+          <%= event.title %>
+          <span class="float-right"
+            ><%= event.total_seat%>/ <%= event.seats_taken %></span
+          >
+        </h5>
 
+        <div class="card-body">
+          <h5 class="card-title"><%= event.instructor %></h5>
+          <h6 class="card-subtitle mb-2 text-muted">
+            <%= event.start_date.toDateString().substring(0,11)%> -<%=
+            event.end_date.toDateString().substring(0,11) %>, <%=
+            event.start_time %>-<%= event.end_time %>
+          </h6>
+          <p class="card-text">
+            <%= event.description %>
+          </p>
+
+          <form
+            class="join_form"
+            action="events/join/<%= event._id %>"
+            method="POST"
+          >
+            <button class="btn btn-primary btn-block join_btn">Join</button>
+          </form>
+          <form
+            class="cancel_form"
+            action="events/cancel/<%= event._id %>"
+            method="POST"
+          >
+            <button class="btn btn-danger btn-block cancel_btn">Cancel</button>
+          </form>
+        </div>
+        <div class="card-footer text-muted">
+          Location: <%= event.gym_location %>, <%= event.room_number %>
+        </div>
+      </div>
+    </div>
+    <% })%>
+  </div>
+</div>
 <% include ../partials/footers/footer.ejs %>
