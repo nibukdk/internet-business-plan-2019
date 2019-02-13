@@ -69,9 +69,14 @@ const TrainingProgramSchema = new Schema({
     required: true,
     default: 0
   },
+  //Total number of enrolled users 
+  enrolled_clients: [{
+    type:Schema.Types.ObjectId,
+    ref:'users'
+  }],
   //List of students enrolled
   created_by: {
-    ref: "user",
+    ref: "users",
     type: Schema.Types.ObjectId
   },
   //Gym_location
