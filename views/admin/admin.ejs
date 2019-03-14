@@ -1,0 +1,127 @@
+<% include ../partials/headers/header.ejs %>
+
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+  <h1 class="display-4">Hey admin!</h1>
+  <p class="lead">
+    Welcome to GYMOID control panel! You can manage the web site from this
+    panel, manage events, check instructor information.
+  </p>
+</div>
+<hr />
+
+<div class="container mt-3">
+  <h1>Instructors</h1>
+  <br />
+  <input class="form-control" id="myInput" type="text" placeholder="Search.." />
+  <br />
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Instructor</th>
+        <th scope="col">Expertise</th>
+        <th scope="col">Appointed classes</th>
+        <th scope="col">Joining date</th>
+        <th scope="col">Location</th>
+      </tr>
+    </thead>
+    <tbody id="myTable">
+      <tr>
+        <td>Jude Halberg</td>
+        <td>Bodycombat</td>
+        <td>3</td>
+        <td>11.12.2018</td>
+        <td>Kotkantie 1</td>
+      </tr>
+      <tr>
+        <td>Mark Otto</td>
+        <td>Poweryoga, Meditation</td>
+        <td>5</td>
+        <td>21.07.2018</td>
+        <td>Kotkantie 1</td>
+      </tr>
+      <tr>
+        <td>Shera Verrett</td>
+        <td>Poweryoga, Meditation</td>
+        <td>5</td>
+        <td>21.07.2018</td>
+        <td>Kotkantie 1</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<hr />
+<h2 class="text-center">Onging Events</h2>
+<div class="contianer">
+  <div class="row">
+    <% events.map(event => { %>
+    <div class="col-md-3 col-lg-3 col-sm-3">
+      <div class="card text-white bg-dark  ">
+        <h5 class="card-header" title="Event Title">
+          <%= event.title %>
+          <span class="float-right" title="Total Seats / Seats Taken"
+            ><%= event.total_seat%>/ <%= event.seats_taken %></span
+          >
+        </h5>
+
+        <div class="card-body">
+          <h5 class="card-title" title="Name of Instructor">
+            <%= event.instructor %>
+          </h5>
+          <h6 class="card-subtitle mb-2 text-muted" title="Date">
+            <%= event.start_date.toDateString()%>-<%=
+            event.end_date.toDateString() %>
+          </h6>
+          <h6 class="card-subtitle mb-2 text-muted" title="Time">
+            <%= event.start_time %>-<%= event.end_time %>
+          </h6>
+
+          <p class="card-text" title="Description">
+            <%= event.description %>
+          </p>
+          <a
+            href="admin/edit_program/<%= event._id %>"
+            class="btn btn-info btn edit_btn "
+            title="Edit This Event"
+            >Edit
+          </a>
+          <form
+            class="delete_form"
+            action="admin/delete/<%= event._id %>?_method=DELETE"
+            method="POST"
+          >
+            <button
+              class="btn btn-danger btn delete_btn"
+              title="Delete This Event"
+            >
+              Delete
+            </button>
+          </form>
+        </div>
+        <div class="card-footer text-muted" title="Location Of Gym">
+          Location: <%= event.gym_location %>, <%= event.room_number %>
+        </div>
+      </div>
+    </div>
+    <% })%>
+  </div>
+</div>
+<hr />
+
+<script>
+  $(document).ready(function() {
+    $("#myInput").on("keyup", function() {
+      var value = $(this)
+        .val()
+        .toLowerCase();
+      $("#myTable tr").filter(function() {
+        $(this).toggle(
+          $(this)
+            .text()
+            .toLowerCase()
+            .indexOf(value) > -1
+        );
+      });
+    });
+  });
+</script>
+<% include ../partials/footers/footer.ejs %>

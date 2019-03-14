@@ -1,0 +1,239 @@
+<% include ../partials/headers/header.ejs %>
+
+ <h1>Client Profile Page</h1>	
+
+ <br>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-4">
+      <!--left col-->
+      <div class="card" style="width: 18rem;">
+        <img
+          class="card-img-top img-thumbnail"
+          src="<%= userProfile.image%>"
+          alt="Card image cap"
+        />
+        <!--<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
+        <div class="card">
+          <div class="card-header">
+            Profile
+          </div>
+          <ul class="list-group list-group-flush">
+             <li class="list-group-item text-right">
+              <span class="pull-left"><strong>Name</strong></span> <%= userProfile.name %>
+            </li>            
+            <li class="list-group-item text-right">
+                    <span class="pull-left"><strong>Gym</strong></span> Hanhitie 17
+            </li>
+            <li class="list-group-item text-right">
+                    <span class="pull-left"><strong>Joined</strong></span><%= userProfile.register_date.toDateString().substring(0,16) %>     </li>
+                  <li class="list-group-item text-right">
+                        <span class="pull-left"><strong>Address</strong></span><%= userProfile.address%></li>
+            <li class="list-group-item text-right">
+              <span class="pull-left"><strong>Phone</strong></span> <%= userProfile.phone%>  
+            </li>
+            <li class="list-group-item text-right">
+              <span class="pull-left"><strong>Level</strong></span> Beginner
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-8">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Physical status</a>
+                </li>
+                <!--<li class="nav-item">
+                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#messages" role="tab" aria-controls="profile" aria-selected="false">Messages</a>
+                </li> -->
+                <li class="nav-item">
+                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#settings" aria-controls="contact" aria-selected="false">Settings</a>
+                </li>              
+            </ul>
+
+             <div class="tab-content" id="myTabContent">
+              <div class="tab-pane active" id="home">
+                <div class="table-responsive">
+                  <table class="table table-hover">
+                      <hr />
+                    <tbody id="items">
+                        <tr>
+                            <td>Session</td>
+                            <td>Height</td>
+                            <td>Weight</td>
+                            <td>Dietary</td>
+                            <td>Previous activities</td>
+                            <td>Date</td>
+
+                           </tr>
+                      <tr>
+                        <td>1</td>
+                        <td>165 cm</td>
+                        <td>55 kg</td>
+                        <td>Vegan</td>
+                        <td>Running, Dancing</td>
+                        <td>14.02.2019</td>
+
+                       </tr>
+                      <tr>
+                        <td>2</td>
+                        <td>165 cm</td>
+                        <td>55 kg</td>
+                        <td>Vegan</td>
+                        <td>Running, Dancing</td>
+                        <td>14.02.2019</td>
+
+                       </tr>
+                      <tr>
+                        <td>3</td>
+                        <td>165 cm</td>
+                        <td>55 kg</td>
+                        <td>Vegan</td>
+                        <td>Running, Dancing</td>
+                        <td>14.02.2019</td>
+
+                       </tr>
+                      <tr>
+                        <td>4</td>
+                        <td>165 cm</td>
+                        <td>55 kg</td>
+                        <td>Vegan</td>
+                        <td>Running, Dancing</td>
+                        <td>14.02.2019</td>
+
+                       </tr>
+                      <tr>
+                        <td>5</td>
+                        <td>165 cm</td>
+                        <td>55 kg</td>
+                        <td>Vegan</td>
+                        <td>Running, Dancing</td>
+                        <td>14.02.2019</td>
+
+                       </tr>
+
+                     </tbody>
+                  </table>
+                 <!-- <hr /> -->
+
+                 </div>
+                <!--/table-resp-->
+
+                <!-- <hr /> -->
+              </div>
+              <!--/tab-pane-->
+              <div class="tab-pane" id="messages">
+                <h2></h2>
+     
+              </div>
+              <!--/tab-pane-->
+              <div class="tab-pane" id="settings">
+                <hr />
+                 <form class="form" action="client/profile/update/<%=userProfile.id%>" method="POST" id="registrationForm">
+                    <div class="form-group">
+                      <div class="col-xs-6">
+                        <label for="image"><h4>Image</h4></label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          name="image"
+                          id="image"
+                          placeholder="Enter Image Url"
+                          title="Provide url address for image."
+                        />
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="col-xs-6">
+                        <label for="address"><h4>Address</h4></label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          name="address"
+                          id="address"
+                          placeholder="Address"
+                          title="Provide Your Address "
+                          
+                        />
+                      </div>
+                    </div>
+  
+                     <div class="form-group">
+                      <div class="col-xs-6">
+                        <label for="hobbies"><h4>Hobbies</h4></label>
+                        <textarea class="form-control" id="hobbies" rows="3" name="hobbies" title="Provide your hobbies" placeholder="for eg: Dancing, Yoga, Singing"></textarea>
+                      </div>
+                    </div>
+  
+                     
+                    <div class="form-group">
+                      <div class="col-xs-6">
+                        <label for="birth_date"><h4>Birth Date</h4></label>
+                        <input
+                        type="date"
+                        class="form-control"
+                        id="birth_date"
+                        title="Provide Your Birth Date"
+                        name="birth_date"
+                       
+                      />
+                      </div>
+                    </div>
+                   
+                  
+                  <div class="form-group">
+                    <div class="col-xs-12">
+                      <br />
+                      <button class="btn btn-lg btn-success" type="submit">
+                        <i class="glyphicon glyphicon-ok-sign"></i> Save
+                      </button>
+                      <button class="btn btn-lg" type="reset">
+                        <i class="glyphicon glyphicon-repeat"></i> Reset
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <!--/tab-pane-->
+          </div>
+          <!--/tab-content-->
+        </div>
+        <!--/col-9-->
+  </div>
+</div>
+<script type="text/javascript">
+
+  // $(document).ready(() => {
+  //   $("#settings").on('active', ()=>{
+  //     const convert = str => {
+  //     const mnths = {
+  //         Jan: "01",
+  //         Feb: "02",
+  //         Mar: "03",
+  //         Apr: "04",
+  //         May: "05",
+  //         Jun: "06",
+  //         Jul: "07",
+  //         Aug: "08",
+  //         Sep: "09",
+  //         Oct: "10",
+  //         Nov: "11",
+  //         Dec: "12"
+  //       },
+  //       date = str.split(" ");
+
+  //     return [date[3], mnths[date[1]], date[2]].join("-");
+  //   };
+
+  //   $("#birth_date").val(convert("<%=userProfile.birth_date %>"));
+  //   $("#address").val("<%=userProfile.address %>");
+  //   $("#image").val("<%=userProfile.image %>");
+  //   $("#hobbies").val("<%=userProfile.hobbies %>");
+
+  //   });
+    
+  // });
+</script>
+<% include ../partials/footers/footer.ejs %>	

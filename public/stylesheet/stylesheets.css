@@ -1,0 +1,124 @@
+form {
+  margin: 5px auto;
+  width: 80%;
+  text-align: justify;
+  border: 0.1px solid grey;
+  padding: 5px;
+}
+
+input {
+  outline: none;
+}
+
+h1 {
+  text-align: center;
+}
+
+footer {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+footer p {
+  margin-bottom: 0.25rem;
+}
+
+.box-shadow {
+  box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.05);
+}
+
+html {
+  font-size: 14px;
+}
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.container {
+  max-width: 960px;
+}
+
+.delete_form,
+.join_form,
+.cancel_form {
+  padding: none;
+  margin: none;
+  border: none;
+  width: 101%;
+  text-align: center;
+}
+.delete_btn,
+.edit_btn {
+  width: 101%;
+}
+/* Client Profile Page Settings
+..........................
+................... */
+
+.client-event-card {
+  justify-content: center;
+  margin: 15px;
+}
+
+.user-row {
+  margin-bottom: 14px;
+}
+
+.user-row:last-child {
+  margin-bottom: 0;
+}
+
+.dropdown-user {
+  margin: 13px 0;
+  padding: 5px;
+  height: 100%;
+}
+
+.dropdown-user:hover {
+  cursor: pointer;
+}
+
+.table-user-information > tbody > tr {
+  border-top: 1px solid rgb(221, 221, 221);
+}
+
+.table-user-information > tbody > tr:first-child {
+  border-top: 0;
+}
+
+.table-user-information > tbody > tr > td {
+  border-top: 0;
+}
+.toppad {
+  margin-top: 20px;
+}
+
+.list-group .pull-left {
+  float: left;
+}
+
+/* -..................................- */
+/* Card */
+.card {
+  margin-bottom: 5px;
+}
+/* style for messages */
+#messages ul {
+  list-style: none;
+  width: 80%;
+  text-align: center;
+  margin: 3px;
+}
+/* Admin Card */
+
+/* Event Container Card Admin */
+.admin-event-container-card {
+  margin: auto;
+  padding: none;
+}
+
+.admin-event-container-card .card {
+  padding: none;
+}

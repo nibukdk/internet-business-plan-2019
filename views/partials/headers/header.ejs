@@ -1,0 +1,96 @@
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <link
+      href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+      rel="stylesheet"
+      id="bootstrap-css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="../../stylesheet/stylesheets.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+      integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
+      crossorigin="anonymous"
+    />
+    <!-- jquery link  -->
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.js"
+      integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+      crossorigin="anonymous"
+    ></script>
+
+    <title><%= page.title %></title>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-12 col-sm-9">
+          <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="/">Gymoid</a>
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-toggle="collapse"
+              data-target="#navbarsExample05"
+              aria-controls="navbarsExample05"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarsExample05">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                  <a class="nav-link" href="/">Home </a>
+                </li>
+                <% if(currentUser){ %> <% if(currentUser.memberCategory
+                !=="student") { %>
+                <li class="nav-item">
+                  <a class="nav-link" href="/register">Register</a>
+                </li>
+
+                <!-- <li class="nav-item">
+                  <a class="nav-link" href="">Events</a>
+                </li> -->
+                <li class="nav-item">
+                  <a class="nav-link" href="/admin">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/admin/set-program">New Event</a>
+                </li>
+                <%} %> <% if(currentUser.memberCategory ==="student") { %>
+                <li class="nav-item">
+                  <a class="nav-link" href="/client">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/client/events">Events</a>
+                  </li>
+                <%}%>
+                <li class="nav-item">
+                  <a class="nav-link" href="/logout">Log out </a>
+                </li>
+                <% } else { %>
+
+                <li class="nav-item">
+                  <a class="nav-link" href="/login">Login </a>
+                </li>
+
+                <%}%>
+              </ul>
+            </div>
+            <script></script>
+          </nav>
+       <!-- display flash messages -->
+          <%- messages('my_message_template', locals) %>

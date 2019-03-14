@@ -1,0 +1,140 @@
+<% include ./partials/headers/header.ejs %>
+
+<section class="jumbotron text-center bg-light">
+  <div class="container">
+    <h1 class="jumbotron-heading">WELCOME TO GYMOID FOR LIIKKU</h1>
+    <p class="lead text-muted">
+      We have an easy-to-use web portal for managing the events for Liikku
+      health center. Login and manage your business efficiently.
+    </p>
+    <% if(!currentUser){ %>
+    <p>
+      <a href="/login" class="btn btn-primary my-2">LOGIN</a>
+    </p>
+    <% } %>
+  </div>
+</section>
+
+<div class="row">
+  <% if(!currentUser ) { %> <% events.map(event => { %>
+  <div class="col-md-6 col-lg-6 col-sm-4">
+    <div class="card bg-light ">
+      <h5 class="card-header" title="Event Title">
+        <%= event.title %>
+        <span class="float-right" title="Total Seats / Seats Taken"
+          ><%= event.total_seat%>/ <%= event.seats_taken %></span
+        >
+      </h5>
+      <div class="card-body">
+        <h5 class="card-title" title="Name of Instructor">
+          Instructor: <%= event.instructor %>
+        </h5>
+        <h6 class="card-subtitle mb-2 text-muted" title="Date">
+          <%= event.start_date.toDateString()%>-<%=
+          event.end_date.toDateString() %>,
+        </h6>
+        <h6 class="card-subtitle mb-2 text-muted" title="Time">
+          <%= event.start_time %>-<%= event.end_time %>
+        </h6>
+        <p class="card-text" title="Description">
+          <%= event.description %>
+        </p>
+      </div>
+      <div class="card-footer text-muted" title="Location Of Gym">
+        Location: <%= event.gym_location %>, <%= event.room_number %>
+      </div>
+    </div>
+  </div>
+  <% })%> <% } else if( currentUser && currentUser.memberCategory==='student')
+  {%>
+  <!-- ---------------------------------------------- -->
+  <!-- ---------------------------------------------- -->
+  <!-- if user is student -->
+  <% if(notJoinedEvents.length <=0 ){%>
+  <!-- If user is  logged in but have joined all events already -->
+  <div class="col-md-12 col-lg-12 col-sm-4">
+    <p>You are enrolled in all current Envents</p>
+  </div>
+  <%} else {%>
+  <!-- ----------------------------- -->
+  <!-- If user is  logged in but have not joined all events already -->
+  <div class="col-md-12 col-lg-12 col-sm-4">
+    <h2>Events You might be interested in..</h2>
+  </div>
+  <% notJoinedEvents.map(event => { %>
+  <div class="col-md-6 col-lg-6 col-sm-4">
+    <div class="card bg-light client-event-card">
+      <h5 class="card-header" title="Event Title">
+        <%= event.title %>
+        <span class="float-right" title="Total Seats / Seats Taken"
+          ><%= event.total_seat%>/ <%= event.seats_taken %></span
+        >
+      </h5>
+      <div class="card-body">
+        <h5 class="card-title" title="Name of Instructor">
+          Instructor: <%= event.instructor %>
+        </h5>
+        <h6 class="card-subtitle mb-2 text-muted" title="Date">
+          <%= event.start_date.toDateString()%>-<%=
+          event.end_date.toDateString() %>,
+        </h6>
+        <h6 class="card-subtitle mb-2 text-muted" title="Time">
+          <%= event.start_time %>-<%= event.end_time %>
+        </h6>
+        <p class="card-text" title="Description">
+          <%= event.description %>
+        </p>
+        <form
+          class="join_form"
+          action="client/events/join/<%= event._id %>"
+          method="POST"
+        >
+          <button class="btn btn-primary btn-block join_btn">Join</button>
+        </form>
+      </div>
+      <div class="card-footer text-muted" title="Location Of Gym">
+        Location: <%= event.gym_location %>, <%= event.room_number %>
+      </div>
+    </div>
+  </div>
+  <% })%> <%}%> <%}else {%>
+  <!-- if user is admin -->
+  <% allEvents.map(event => { %>
+  <div class="col-md-6 col-lg-6 col-sm-4">
+    <div class="card bg-light ">
+      <h5 class="card-header" title="Event Title">
+        <%= event.title %>
+        <span class="float-right" title="Total Seats / Seats Taken"
+          ><%= event.total_seat%>/ <%= event.seats_taken %></span
+        >
+      </h5>
+      <div class="card-body">
+        <h5 class="card-title" title="Name of Instructor">
+          Instructor: <%= event.instructor %>
+        </h5>
+        <h6 class="card-subtitle mb-2 text-muted" title="Date">
+          <%= event.start_date.toDateString()%>-<%=
+          event.end_date.toDateString() %>,
+        </h6>
+        <h6 class="card-subtitle mb-2 text-muted" title="Time">
+          <%= event.start_time %>-<%= event.end_time %>
+        </h6>
+        <p class="card-text" title="Description">
+          <%= event.description %>
+        </p>
+
+        <a
+          href="admin/edit_program/<%= event._id %>"
+          class="btn btn-info btn-block"
+          >Edit
+        </a>
+      </div>
+      <div class="card-footer text-muted" title="Location Of Gym">
+        Location: <%= event.gym_location %>, <%= event.room_number %>
+      </div>
+    </div>
+  </div>
+  <!-- -------------------------------------------------------- -->
+  <% })%> <%}%>
+</div>
+<% include ./partials/footers/footer.ejs %>
