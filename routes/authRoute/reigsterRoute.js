@@ -19,16 +19,16 @@ router.use((req, res, next) => {
 });
 
 //Registration route
-router.get("/", (req, res) => {
+router.get("/", authentication.adminLoggedIn,(req, res) => {
   const page = { title: "Register" };
   res
     .status(200)
-    .render("auth//register", { page: page, currentUser: req.user });
+    .render("auth/register", { page: page, currentUser: req.user });
   //const page = { title: "Register" };
   //res.status(200).render("register", { page: page });
 });
 
-router.post("/", (req, res) => {
+router.post("/", authentication.adminLoggedIn, (req, res) => {
   const { errors, isValid } = validateRegisterInput(req.body);
   //Check validation
   if (!isValid) {
