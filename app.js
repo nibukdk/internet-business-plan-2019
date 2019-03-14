@@ -19,7 +19,7 @@ const loginRoute = require("./routes/authRoute/loginRoute");
 const clientRoute = require("./routes/clientRoute/clientRoute");
 
 //Set port for local server
-const PORT = 8080 || process.env.PORT;
+const PORT =  process.env.PORT || 5000;
 
 //Deine static files path
 app.use(express.static(__dirname + "/public/"));
