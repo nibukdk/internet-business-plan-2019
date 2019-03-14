@@ -19,7 +19,7 @@ const loginRoute = require("./routes/authRoute/loginRoute");
 const clientRoute = require("./routes/clientRoute/clientRoute");
 
 //Set port for local server
-const PORT = 8080;
+const PORT = 8080 || process.env.PORT;
 
 //Deine static files path
 app.use(express.static(__dirname + "/public/"));
@@ -154,6 +154,6 @@ app.use("/register", registerRoute);
 app.use("/login", loginRoute);
 app.use("/client", clientRoute);
 
-app.listen(PORT || process.env.PORT, err => {
+app.listen(PORT, err => {
   console.log("App is running at ", PORT);
 });
